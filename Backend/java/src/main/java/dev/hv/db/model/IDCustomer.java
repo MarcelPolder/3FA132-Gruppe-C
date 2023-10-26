@@ -1,4 +1,4 @@
-package dev.hv.db.model;
+package main.java.dev.hv.db.model;
 
 public interface IDCustomer {
 
