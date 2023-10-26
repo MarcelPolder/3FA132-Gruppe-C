@@ -1,6 +1,6 @@
-package main.java.dev.hv.db.model;
+package dev.hv.db.model;
 
-public interface IDCustomer {
+public interface IDUser {
 
    String getFirstname();
 
@@ -8,9 +8,17 @@ public interface IDCustomer {
 
    String getLastname();
 
+   String getPassword();
+
+   String getToken();
+
    void setFirstname(String firstName);
 
    void setId(Long id);
 
    void setLastname(String lastName);
+
+   void setPassword(String password);
+
+   void setToken(String token);
 }

@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dev.hv0</groupId>
-	<artifactId>Hausverwaltung0</artifactId>
+	<artifactId>Hausverwaltung</artifactId>
 	<version>0.0.1</version>
 
 	<properties>

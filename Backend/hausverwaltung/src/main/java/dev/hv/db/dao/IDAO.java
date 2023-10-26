@@ -1,4 +1,4 @@
-package main.java.dev.hv.db.dao;
+package dev.hv.db.dao;
 
 import java.util.List;
 

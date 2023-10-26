@@ -1,4 +1,4 @@
-package main.java.dev.hv.db.init;
+package dev.hv.db.init;
 
 import org.jdbi.v3.core.Jdbi;
 

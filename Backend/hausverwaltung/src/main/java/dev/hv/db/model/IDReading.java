@@ -1,4 +1,4 @@
-package main.java.dev.hv.db.model;
+package dev.hv.db.model;
 
 public interface IDReading {
 
