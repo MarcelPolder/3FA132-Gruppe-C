@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IDAO<T> {
 
-   // DELETE
+   // DELETE _
    void delete(Long id);
 
    // DELETE
