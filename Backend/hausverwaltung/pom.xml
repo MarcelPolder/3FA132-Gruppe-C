@@ -17,6 +17,37 @@
 		<mariadb.version>3.1.1</mariadb.version>
 		<slf4j.version>1.7.36</slf4j.version>
 	</properties>
+	<build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>4.0.0-M11</version>
+                </plugin>
+			</plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.2.1</version>
+			</plugin>
+        </plugins>
+    </build>
+	<reporting>
+		<plugins>
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-report-plugin</artifactId>
+			<version>3.2.1</version>
+		  </plugin>
+		</plugins>
+	  </reporting>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
