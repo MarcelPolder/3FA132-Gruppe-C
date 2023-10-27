@@ -52,7 +52,7 @@ public class IDb implements IDbConnect {
 		if (this.jdbiInstance == null) {
 			Properties appProps = new Properties();
 			try {
-				appProps.load(new FileInputStream("/src/main/resources/app.properties"));
+				appProps.load(new FileInputStream("src/main/resources/app.properties"));
 				this.jdbiInstance = this.getJdbi(appProps.getProperty("DB_URI"), appProps.getProperty("DB_USER"), appProps.getProperty("DB_PASS"));
 			} catch (IOException e) {
 				e.printStackTrace();
