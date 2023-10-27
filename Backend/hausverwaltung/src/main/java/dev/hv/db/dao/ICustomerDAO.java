@@ -8,7 +8,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import dev.hv.db.model.IDCustomer;
-
+//test
 public interface ICustomerDAO extends IDAO<IDCustomer>{
 
 	@Override
