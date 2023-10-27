@@ -68,5 +68,30 @@ public class IDb implements IDbConnect {
 
 	@Override
 	public void removeAllTables() {
+		Handle h = IDb.getInstance().getJdbi().open();
+		h.execute("DROP TABLE customer; DROP TABLE reading; DROP TABLE user;");
+		h.close();
+	}
+	
+	public void importData() {
+		Handle h = IDb.getInstance().getJdbi().open();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/db/data-2023-10-27.sql"));
+			int charCode = reader.read();
+			String sql = "";
+			while (charCode > 0) {
+				sql += (char) charCode;
+				charCode = reader.read();
+				
+				if ((char) charCode == ';') {
+					h.execute(sql);
+				}
+			}
+			reader.close();
+			h.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
