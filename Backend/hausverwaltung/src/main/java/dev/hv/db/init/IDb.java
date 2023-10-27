@@ -1,36 +1,72 @@
 package dev.hv.db.init;
 
 import org.jdbi.v3.core.Jdbi;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.jdbi.v3.core.Handle;
 
 public class IDb implements IDbConnect {
-	private Jdbi instance;
+	private Jdbi jdbiInstance;
+	private static IDb instance;
+	
+	private IDb() {
+	}
+	
+	public static IDb getInstance() {
+		if (instance == null) {
+			instance = new IDb();
+		}
+		return instance;
+	}
 
 	@Override
 	public void createAllTables() {
+		Jdbi db = this.getJdbi();
+		Handle h = db.open();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/db/schema.sql"));
+			int charCode = reader.read();
+			String sql = "";
+			while (charCode > 0) {
+				sql += (char) charCode;
+				charCode = reader.read();
+				
+				if ((char) charCode == ';') {
+					h.execute(sql);
+				}
+			}
+			reader.close();
+			h.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Jdbi getJdbi() {
-		return this.instance;
+		if (this.jdbiInstance == null) {
+			Properties appProps = new Properties();
+			try {
+				appProps.load(new FileInputStream("/src/main/resources/app.properties"));
+				this.jdbiInstance = this.getJdbi(appProps.getProperty("DB_URI"), appProps.getProperty("DB_USER"), appProps.getProperty("DB_PASS"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return this.jdbiInstance;
 	}
 
 	@Override
 	public Jdbi getJdbi(String uri, String user, String pw) {
-		if (this.instance == null) {
-			this.instance = Jdbi.create(uri);
-		}
-		return this.instance;
+		return Jdbi.create(uri, user, pw);
 	}
 
 	@Override
 	public void removeAllTables() {
-	}
-
-	public static void main(String[] args) {
-		IDb idb = new IDb();
-		Jdbi t = idb.getJdbi("jdbc:sqlite:./src/main/resources/db/database", "", "");
-		Handle h = t.open();
-		System.out.println(h.execute("SELECT * FROM customer;"));
 	}
 }
