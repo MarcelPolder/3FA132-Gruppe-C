@@ -6,15 +6,15 @@ public interface IDReading {
 
    IDCustomer getCustomer();
 
-   Long getDateofreading();
+   Long getDateOfReading();
 
    Long getId();
 
-   String getKindofmeter();
+   String getKindOfMeter();
 
-   Double getMetercount();
+   Double getMeterCount();
 
-   String getMeterid();
+   String getMeterId();
 
    Boolean getSubstitute();
 
@@ -24,15 +24,15 @@ public interface IDReading {
 
    void setCustomer(IDCustomer customer);
 
-   void setDateofreading(Long dateOfReading);
+   void setDateOfReading(Long dateOfReading);
 
    void setId(Long id);
 
-   void setKindofmeter(String kindOfMeter);
+   void setKindOfMeter(String kindOfMeter);
 
-   void setMetercount(Double meterCount);
+   void setMeterCount(Double meterCount);
 
-   void setMeterid(String meterId);
+   void setMeterId(String meterId);
 
    void setSubstitute(Boolean substitute);
 
