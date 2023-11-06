@@ -2,11 +2,13 @@ package dev.hv.db.dao;
 
 import java.util.List;
 
+import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+import dev.hv.db.model.DCustomer;
 import dev.hv.db.model.DReading;
 
 public interface IReadingDAO extends IDAO<DReading> {
@@ -30,12 +32,14 @@ public interface IReadingDAO extends IDAO<DReading> {
 			SELECT * FROM reading
 			WHERE id = :rid
 			""")
+	@RegisterBeanMapper(DReading.class)
 	DReading findById(@Bind("rid") int id);
 
 	@Override
 	@SqlQuery("""
 			SELECT * FROM reading
 			""")
+	@RegisterBeanMapper(DReading.class)
 	List<DReading> getAll();
 
 	@Override
