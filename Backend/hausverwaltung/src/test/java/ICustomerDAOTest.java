@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.List;
 
@@ -136,5 +137,39 @@ public class ICustomerDAOTest {
 			}
 		}
 	}
+	
+	@Test
+	public void update_test() {
+		Jdbi connection = IDb.getInstance().getJdbi();
+		connection.installPlugin(new SqlObjectPlugin());
+		connection.installPlugin(new GuavaPlugin());
+
+		Handle handle = connection.open();
+		try {
+			handle.begin();			
+			final ICustomerDAO dao = handle.attach(ICustomerDAO.class);
+			
+			DCustomer cus = dao.findById(1);
+			String initname = cus.getFirstname();
+			
+			String changeName = "Marcel";
+			cus.setFirstname(changeName);
+			
+			assertNotEquals(initname, changeName);
+			
+			
+			System.out.println("Old Name: " + initname);
+			System.out.println("New Name: " + changeName);
+
+		} finally {
+			if (handle != null) {
+				handle.rollback();
+				handle.close();
+				System.out.println("Rolled Back Changes");
+			}
+		}
+	}
+	
+	
 
 }
