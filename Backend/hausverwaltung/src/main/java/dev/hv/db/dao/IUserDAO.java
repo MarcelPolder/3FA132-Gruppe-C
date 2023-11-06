@@ -9,9 +9,9 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import dev.hv.db.model.DCustomer;
-import dev.hv.db.model.IDUser;
+import dev.hv.db.model.DUser;
 
-public interface IUserDAO extends IDAO<IDUser> {
+public interface IUserDAO extends IDAO<DUser> {
 
 	@Override
 	@SqlUpdate("""
@@ -25,7 +25,7 @@ public interface IUserDAO extends IDAO<IDUser> {
 			DELETE FROM user
 			WHERE id = :user.id
 			""")
-	void delete(@BindBean("user") IDUser o);
+	void delete(@BindBean("user") DUser o);
 
 	@Override
 	@SqlQuery("""
@@ -33,14 +33,14 @@ public interface IUserDAO extends IDAO<IDUser> {
 			WHERE id = :uid
 			""")
 	@RegisterBeanMapper(DCustomer.class)
-	IDUser findById(@Bind("uid") Long id);
+	DUser findById(@Bind("uid") Long id);
 
 	@Override
 	@SqlQuery("""
 			SELECT * FROM user
 			""")
 	@RegisterBeanMapper(DCustomer.class)
-	List<IDUser> getAll();
+	List<DUser> getAll();
 
 	@Override
 	@SqlUpdate("""
@@ -48,7 +48,7 @@ public interface IUserDAO extends IDAO<IDUser> {
 			(id, vorname, nachname) 
 			Values(:user.Id, :user.Vorname, :user.Nachname)
 			""")
-	long insert(@BindBean("user") IDUser o);
+	long insert(@BindBean("user") DUser o);
 
 	@Override
 	@SqlUpdate("""
@@ -57,7 +57,7 @@ public interface IUserDAO extends IDAO<IDUser> {
 			Values(:user.Vorname, :user.Nachname)
 			WHERE id = :uid
 			""")
-	void update(@Bind("uid") Long id, @BindBean("user") IDUser o);
+	void update(@Bind("uid") Long id, @BindBean("user") DUser o);
 
 	@Override
 	@SqlUpdate("""
@@ -66,6 +66,6 @@ public interface IUserDAO extends IDAO<IDUser> {
 			Values(:user.Vorname, :user.Nachname)
 			WHERE id = :user.Id
 			""")
-	void update(@BindBean("user") IDUser o);
+	void update(@BindBean("user") DUser o);
 
 }

@@ -11,7 +11,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import dev.hv.db.model.DCustomer;
 import dev.hv.db.model.IDCustomer;
 
-public interface ICustomerDAO extends IDAO<IDCustomer> {
+public interface ICustomerDAO extends IDAO<DCustomer> {
 
 	@Override
 	@SqlUpdate("""
@@ -25,23 +25,24 @@ public interface ICustomerDAO extends IDAO<IDCustomer> {
 			DELETE FROM customer
 			WHERE id = :cus.Id
 			""")
-	void delete(@BindBean("cus") IDCustomer o);
+	void delete(@BindBean("cus") DCustomer o);
 
 	@Override
 	@SqlQuery("""
-			SELECT  c.id as c_id, c.firstname as c_firstname, c.lastname as c_lastname
+			SELECT  c.id as id, c.vorname as firstname, c.nachname as lastname
 			FROM customer c
 			WHERE id = :cid
 			""")
 	@RegisterBeanMapper(DCustomer.class)
-	IDCustomer findById(@Bind("cid") Long id);
+	DCustomer findById(@Bind("cid") Long id);
 
 	@Override
 	@SqlQuery("""
-			SELECT * FROM customer
+			SELECT  c.id as id, c.vorname as firstname, c.nachname as lastname
+			FROM customer c			
 			""")
 	@RegisterBeanMapper(DCustomer.class)
-	List<IDCustomer> getAll();
+	List<DCustomer> getAll();
 
 	@Override
 	@SqlUpdate("""
@@ -49,7 +50,7 @@ public interface ICustomerDAO extends IDAO<IDCustomer> {
 			(id, vorname, nachname) 
 			Values(:cus.Id, :cus.Vorname, :cus.Nachname)
 			""")
-	long insert(@BindBean("cus") IDCustomer o);
+	long insert(@BindBean("cus") DCustomer o);
 
 	@Override
 	@SqlUpdate("""
@@ -58,7 +59,7 @@ public interface ICustomerDAO extends IDAO<IDCustomer> {
 			Values(:cus.Vorname, :cus.Nachname)
 			WHERE id = :cid
 			""")
-	void update(@Bind("cid") Long id, @BindBean("cus") IDCustomer o);
+	void update(@Bind("cid") Long id, @BindBean("cus") DCustomer o);
 
 	@Override
 	@SqlUpdate("""
@@ -67,6 +68,6 @@ public interface ICustomerDAO extends IDAO<IDCustomer> {
 			Values(:cus.vorname, :cus.nachname)
 			WHERE id = :cus.id
 			""")
-	void update(@BindBean("cus") IDCustomer o);
+	void update(@BindBean("cus") DCustomer o);
 
 }

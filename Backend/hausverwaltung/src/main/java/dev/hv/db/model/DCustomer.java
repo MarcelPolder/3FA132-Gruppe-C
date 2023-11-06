@@ -15,16 +15,16 @@ public class DCustomer implements IDCustomer {
 
 	// Region Private Fields
 
-	@ColumnName("c_id")
+	@ColumnName("id")
 	private Long Id;
 	
-	@ColumnName("c_firstname")
+	@ColumnName("firstname")
 	private String Firstname;
 	
-	@ColumnName("c_lastname")
+	@ColumnName("lastname")
 	private String Lastname;
 	
-	@ConstructorProperties({ "c_id", "c_firstname", "c_lastname" })
+	@ConstructorProperties({ "id", "firstname", "lastname" })
 	public DCustomer(final Long _id, final String _firstname, final String _lastname ) {
 		Id = _id;
 		Firstname = _firstname;

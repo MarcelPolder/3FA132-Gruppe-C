@@ -7,9 +7,9 @@ import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
-import dev.hv.db.model.IDReading;
+import dev.hv.db.model.DReading;
 
-public interface IReadingDAO extends IDAO<IDReading> {
+public interface IReadingDAO extends IDAO<DReading> {
 
 	@Override
 	@SqlUpdate("""
@@ -23,20 +23,20 @@ public interface IReadingDAO extends IDAO<IDReading> {
 			DELETE FROM reading
 			WHERE id = :read.Id
 			""")
-	void delete(@BindBean("read") IDReading o);
+	void delete(@BindBean("read") DReading o);
 
 	@Override
 	@SqlQuery("""
 			SELECT * FROM reading
 			WHERE id = :rid
 			""")
-	IDReading findById(@Bind("rid") Long id);
+	DReading findById(@Bind("rid") Long id);
 
 	@Override
 	@SqlQuery("""
 			SELECT * FROM reading
 			""")
-	List<IDReading> getAll();
+	List<DReading> getAll();
 
 	@Override
 	@SqlUpdate("""
@@ -44,7 +44,7 @@ public interface IReadingDAO extends IDAO<IDReading> {
 			(id, comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute) 
 			Values(:read.Id, :read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
 			""")
-	long insert(@BindBean("read") IDReading o);
+	long insert(@BindBean("read") DReading o);
 
 	@Override
 	@SqlUpdate("""
@@ -53,7 +53,7 @@ public interface IReadingDAO extends IDAO<IDReading> {
 			Values(:read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
 			WHERE id = :rid
 			""")
-	void update(@Bind("rid") Long id, @BindBean("cus") IDReading o);
+	void update(@Bind("rid") Long id, @BindBean("cus") DReading o);
 
 	@Override
 	@SqlUpdate("""
@@ -62,6 +62,6 @@ public interface IReadingDAO extends IDAO<IDReading> {
 			Values(:read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
 			WHERE id = :read.id
 			""")
-	void update(@BindBean("read") IDReading o);
+	void update(@BindBean("read") DReading o);
 
 }
