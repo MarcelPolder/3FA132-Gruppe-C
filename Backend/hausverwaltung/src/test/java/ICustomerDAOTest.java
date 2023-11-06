@@ -14,6 +14,7 @@ import dev.hv.db.model.DCustomer;
 import dev.hv.db.model.IDCustomer;
 
 public class ICustomerDAOTest {
+	
 	@Test
 	public void delete_test() {
 		Jdbi connection = IDb.getInstance().getJdbi();
@@ -28,7 +29,7 @@ public class ICustomerDAOTest {
 			// .bind("id", 1)
 			// .execute();
 			final ICustomerDAO dao = handle.attach(ICustomerDAO.class);
-			dao.delete((long) 1);
+			dao.delete(1);
 
 			int finalCount = handle.createQuery("SELECT COUNT(*) FROM customer").mapTo(Integer.class).findOnly();
 			assertEquals(initialCount - 1, finalCount);
@@ -39,6 +40,7 @@ public class ICustomerDAOTest {
 			if (handle != null) {
 				handle.rollback();
 				handle.close();
+				System.out.println("Rolled Back Changes");
 			}
 		}
 	}
@@ -54,12 +56,11 @@ public class ICustomerDAOTest {
 			handle.begin();
 
 			final ICustomerDAO dao = handle.attach(ICustomerDAO.class);
-			IDCustomer customer = dao.findById((long) 1);
+			IDCustomer customer = dao.findById(1);
 
 			if (customer != null) {
 				System.out.println(customer.getFirstname());
-			}
-			else {
+			} else {
 				assertEquals(customer, 1);
 			}
 
@@ -70,7 +71,7 @@ public class ICustomerDAOTest {
 			}
 		}
 	}
-	
+
 	@Test
 	public void getAll_test() {
 		Jdbi connection = IDb.getInstance().getJdbi();
@@ -86,8 +87,7 @@ public class ICustomerDAOTest {
 
 			if (customer != null) {
 				System.out.println("Size of List: " + customer.size());
-			}
-			else {
+			} else {
 				assertEquals(customer, 1);
 			}
 
@@ -95,6 +95,44 @@ public class ICustomerDAOTest {
 			if (handle != null) {
 				handle.rollback();
 				handle.close();
+			}
+		}
+	}
+	
+	@Test
+	public void insert_test() {
+		Jdbi connection = IDb.getInstance().getJdbi();
+		connection.installPlugin(new SqlObjectPlugin());
+		connection.installPlugin(new GuavaPlugin());
+
+		Handle handle = connection.open();
+		try {
+			handle.begin();
+			int initialCount = handle.createQuery("SELECT COUNT(*) FROM customer").mapTo(Integer.class).findOnly();
+			
+			final ICustomerDAO dao = handle.attach(ICustomerDAO.class);
+			DCustomer cus = dao.findById(1);
+			
+			List<DCustomer> customer = dao.getAll();
+			int count = customer.size();
+			count++;
+			
+			cus.setId(count);
+			
+			int newId = dao.insert(cus);
+			
+			System.out.println("Added new Object at. " + newId);
+
+			int finalCount = handle.createQuery("SELECT COUNT(*) FROM customer").mapTo(Integer.class).findOnly();
+			assertEquals(initialCount + 1, finalCount);
+			System.out.println(initialCount);
+			System.out.println(finalCount);
+
+		} finally {
+			if (handle != null) {
+				handle.rollback();
+				handle.close();
+				System.out.println("Rolled Back Changes");
 			}
 		}
 	}

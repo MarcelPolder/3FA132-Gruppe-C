@@ -8,7 +8,7 @@ public interface IDReading {
 
    Long getDateOfReading();
 
-   Long getId();
+   int getId();
 
    String getKindOfMeter();
 
@@ -26,7 +26,7 @@ public interface IDReading {
 
    void setDateOfReading(Long dateOfReading);
 
-   void setId(Long id);
+   void setId(int id);
 
    void setKindOfMeter(String kindOfMeter);
 

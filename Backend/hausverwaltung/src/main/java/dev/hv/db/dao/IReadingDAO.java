@@ -16,7 +16,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 			DELETE FROM reading
 			WHERE id = :rid
 			""")
-	void delete(@Bind("rid") Long id);
+	void delete(@Bind("rid") int id);
 
 	@Override
 	@SqlUpdate("""
@@ -30,7 +30,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 			SELECT * FROM reading
 			WHERE id = :rid
 			""")
-	DReading findById(@Bind("rid") Long id);
+	DReading findById(@Bind("rid") int id);
 
 	@Override
 	@SqlQuery("""
@@ -44,7 +44,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 			(id, comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute) 
 			Values(:read.Id, :read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
 			""")
-	long insert(@BindBean("read") DReading o);
+	int insert(@BindBean("read") DReading o);
 
 	@Override
 	@SqlUpdate("""
@@ -53,7 +53,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 			Values(:read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
 			WHERE id = :rid
 			""")
-	void update(@Bind("rid") Long id, @BindBean("cus") DReading o);
+	void update(@Bind("rid") int id, @BindBean("cus") DReading o);
 
 	@Override
 	@SqlUpdate("""

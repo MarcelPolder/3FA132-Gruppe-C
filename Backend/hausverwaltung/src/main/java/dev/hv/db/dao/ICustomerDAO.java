@@ -18,7 +18,7 @@ public interface ICustomerDAO extends IDAO<DCustomer> {
 			DELETE FROM customer
 			WHERE id = :cid
 			""")
-	void delete(@Bind("cid") Long id);
+	void delete(@Bind("cid") int id);
 
 	@Override
 	@SqlUpdate("""
@@ -34,7 +34,7 @@ public interface ICustomerDAO extends IDAO<DCustomer> {
 			WHERE id = :cid
 			""")
 	@RegisterBeanMapper(DCustomer.class)
-	DCustomer findById(@Bind("cid") Long id);
+	DCustomer findById(@Bind("cid") int id);
 
 	@Override
 	@SqlQuery("""
@@ -46,11 +46,11 @@ public interface ICustomerDAO extends IDAO<DCustomer> {
 
 	@Override
 	@SqlUpdate("""
-			INSERT INTO customers
+			INSERT INTO customer
 			(id, vorname, nachname) 
-			Values(:cus.Id, :cus.Vorname, :cus.Nachname)
+			Values(:cus.id, :cus.firstname, :cus.lastname)
 			""")
-	long insert(@BindBean("cus") DCustomer o);
+	int insert(@BindBean("cus") DCustomer o);
 
 	@Override
 	@SqlUpdate("""
@@ -59,7 +59,7 @@ public interface ICustomerDAO extends IDAO<DCustomer> {
 			Values(:cus.Vorname, :cus.Nachname)
 			WHERE id = :cid
 			""")
-	void update(@Bind("cid") Long id, @BindBean("cus") DCustomer o);
+	void update(@Bind("cid") int id, @BindBean("cus") DCustomer o);
 
 	@Override
 	@SqlUpdate("""

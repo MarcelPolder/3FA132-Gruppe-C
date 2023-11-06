@@ -16,7 +16,7 @@ public class DCustomer implements IDCustomer {
 	// Region Private Fields
 
 	@ColumnName("id")
-	private Long Id;
+	private int Id;
 	
 	@ColumnName("firstname")
 	private String Firstname;
@@ -25,7 +25,7 @@ public class DCustomer implements IDCustomer {
 	private String Lastname;
 	
 	@ConstructorProperties({ "id", "firstname", "lastname" })
-	public DCustomer(final Long _id, final String _firstname, final String _lastname ) {
+	public DCustomer(final int _id, final String _firstname, final String _lastname ) {
 		Id = _id;
 		Firstname = _firstname;
 		Lastname = _lastname;

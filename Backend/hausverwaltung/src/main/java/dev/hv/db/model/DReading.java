@@ -18,7 +18,7 @@ public class DReading implements IDReading {
 	// Region Private Fields
 
 	@ColumnName("r_id")
-	private Long Id;
+	private int Id;
 
 	@ColumnName("r_comment")
 	private String Comment;
@@ -43,7 +43,7 @@ public class DReading implements IDReading {
 
 	@ConstructorProperties({ "r_id", "r_comment", "r_date_of_reading", "c_id", "c_firstname", "c_lastname",
 			"r_kind_of_meter", "r_meter_count", "r_meter_id", "r_substitute" })
-	public DReading(final Long id, final String _comment, final Long _dateofread, final Long c_id,
+	public DReading(final int id, final String _comment, final Long _dateofread, final int c_id,
 			final String c_firstname, final String c_lastname, final String _kindofMeter, final Double _meterCount,
 			final String _meterId, final Boolean _substitute) {
 
@@ -55,7 +55,7 @@ public class DReading implements IDReading {
 		MeterId = _meterId;
 		Substitute = _substitute;
 		
-		if (c_id != null) {
+		if (c_id != 0) {
 			Customer = new DCustomer(c_id, c_firstname, c_lastname);
 		}
 	}

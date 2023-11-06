@@ -4,13 +4,13 @@ public interface IDCustomer {
 
    String getFirstname();
 
-   Long getId();
+   int getId();
 
    String getLastname();
 
    void setFirstname(String firstName);
 
-   void setId(Long id);
+   void setId(int id);
 
    void setLastname(String lastName);
 }

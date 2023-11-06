@@ -18,7 +18,7 @@ public interface IUserDAO extends IDAO<DUser> {
 			DELETE FROM user
 			WHERE id = :uid
 			""")
-	void delete(@Bind("uid") Long id);
+	void delete(@Bind("uid") int id);
 
 	@Override
 	@SqlUpdate("""
@@ -33,7 +33,7 @@ public interface IUserDAO extends IDAO<DUser> {
 			WHERE id = :uid
 			""")
 	@RegisterBeanMapper(DCustomer.class)
-	DUser findById(@Bind("uid") Long id);
+	DUser findById(@Bind("uid") int id);
 
 	@Override
 	@SqlQuery("""
@@ -48,7 +48,7 @@ public interface IUserDAO extends IDAO<DUser> {
 			(id, vorname, nachname) 
 			Values(:user.Id, :user.Vorname, :user.Nachname)
 			""")
-	long insert(@BindBean("user") DUser o);
+	int insert(@BindBean("user") DUser o);
 
 	@Override
 	@SqlUpdate("""
@@ -57,7 +57,7 @@ public interface IUserDAO extends IDAO<DUser> {
 			Values(:user.Vorname, :user.Nachname)
 			WHERE id = :uid
 			""")
-	void update(@Bind("uid") Long id, @BindBean("user") DUser o);
+	void update(@Bind("uid") int id, @BindBean("user") DUser o);
 
 	@Override
 	@SqlUpdate("""
