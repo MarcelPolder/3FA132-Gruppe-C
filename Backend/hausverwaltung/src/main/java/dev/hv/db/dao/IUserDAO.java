@@ -32,29 +32,29 @@ public interface IUserDAO extends IDAO<DUser> {
 			SELECT * FROM user
 			WHERE id = :uid
 			""")
-	@RegisterBeanMapper(DCustomer.class)
+	@RegisterBeanMapper(DUser.class)
 	DUser findById(@Bind("uid") int id);
 
 	@Override
 	@SqlQuery("""
 			SELECT * FROM user
 			""")
-	@RegisterBeanMapper(DCustomer.class)
+	@RegisterBeanMapper(DUser.class)
 	List<DUser> getAll();
 
 	@Override
 	@SqlUpdate("""
 			INSERT INTO user
-			(id, vorname, nachname) 
-			Values(:user.Id, :user.Vorname, :user.Nachname)
+			(id, firstname, lastname) 
+			Values(:user.id, :user.firstname, :user.lastname)
 			""")
 	int insert(@BindBean("user") DUser o);
 
 	@Override
 	@SqlUpdate("""
 			UPDATE user
-			SET (vorname, nachname) 
-			Values(:user.Vorname, :user.Nachname)
+			SET (firstname, lastname) 
+			Values(:user.firstname, :user.lastname)
 			WHERE id = :uid
 			""")
 	void update(@Bind("uid") int id, @BindBean("user") DUser o);
@@ -62,9 +62,9 @@ public interface IUserDAO extends IDAO<DUser> {
 	@Override
 	@SqlUpdate("""
 			UPDATE user
-			SET (vorname, nachname) 
-			Values(:user.Vorname, :user.Nachname)
-			WHERE id = :user.Id
+			SET (firstname, lastname) 
+			Values(:user.firstname, :user.lastname)
+			WHERE id = :user.id
 			""")
 	void update(@BindBean("user") DUser o);
 
