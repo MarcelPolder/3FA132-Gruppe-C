@@ -15,24 +15,24 @@ public class DUser implements IDUser {
 
 	// Region Private Fields
 	
-	@ColumnName("u_id")
-	private Long Id;
+	@ColumnName("id")
+	private int Id;
 
-	@ColumnName("u_firstname")
+	@ColumnName("firstname")
 	private String Firstname;
 	
-	@ColumnName("u_lastname")
+	@ColumnName("lastname")
 	private String Lastname;
 	
-	@ColumnName("u_password")
+	@ColumnName("password")
 	private String Password;
 	
-	@ColumnName("u_token")
+	@ColumnName("token")
 	private String Token;
 	
 	
-	@ConstructorProperties({ "u_id", "u_firstname", "u_lastname", "u_password" , "u_token"})
-	public DUser(final Long _id, final String _firstname, final String _lastname, final String _password, final String _token) {
+	@ConstructorProperties({ "id", "firstname", "lastname", "password" , "token"})
+	public DUser(final int _id, final String _firstname, final String _lastname, final String _password, final String _token) {
 		Id = _id;
 		Firstname = _firstname;
 		Lastname = _lastname;

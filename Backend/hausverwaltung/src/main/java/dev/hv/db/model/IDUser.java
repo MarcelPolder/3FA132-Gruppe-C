@@ -4,7 +4,7 @@ public interface IDUser {
 
    String getFirstname();
 
-   Long getId();
+   int getId();
 
    String getLastname();
 
@@ -14,7 +14,7 @@ public interface IDUser {
 
    void setFirstname(String firstName);
 
-   void setId(Long id);
+   void setId(int id);
 
    void setLastname(String lastName);
 
