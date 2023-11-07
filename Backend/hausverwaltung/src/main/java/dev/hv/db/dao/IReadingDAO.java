@@ -46,7 +46,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 	@SqlUpdate("""
 			INSERT INTO reading
 			(id, comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute) 
-			Values(:read.Id, :read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
+			Values(:read.id, :read.comment, :read.customer.id, :read.dateOfReading, :read.kindOfMeter, :read.meterCount, :read.meterId, :read.substitute)
 			""")
 	int insert(@BindBean("read") DReading o);
 
