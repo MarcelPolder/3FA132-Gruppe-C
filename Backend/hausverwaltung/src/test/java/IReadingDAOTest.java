@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -138,4 +139,38 @@ public class IReadingDAOTest {
 			}
 		}
 	}
+	@Test
+	public void update_test() {
+		Jdbi connection = IDb.getInstance().getJdbi();
+		connection.installPlugin(new SqlObjectPlugin());
+		connection.installPlugin(new GuavaPlugin());
+
+		Handle handle = connection.open();
+		try {
+			handle.begin();			
+			final IReadingDAO dao = handle.attach(IReadingDAO.class);
+			
+			DReading reading = dao.findById(1);
+			String initname = reading.getKindOfMeter();
+			
+			String changeName = "Wasser2";
+			reading.setKindOfMeter(changeName);
+			
+			assertNotEquals(initname, changeName);
+			
+			
+			System.out.println("Old Name: " + initname);
+			System.out.println("New Name: " + changeName);
+
+		} finally {
+			if (handle != null) {
+				handle.rollback();
+				handle.close();
+				System.out.println("Rolled Back Changes");
+			}
+		}
+	}
+	
+	
+	
 }
