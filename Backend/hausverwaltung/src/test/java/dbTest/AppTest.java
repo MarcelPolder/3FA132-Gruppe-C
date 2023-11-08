@@ -1,3 +1,5 @@
+package dbTest;
+
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
