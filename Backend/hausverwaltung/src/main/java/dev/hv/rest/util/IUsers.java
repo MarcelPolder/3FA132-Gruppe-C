@@ -13,7 +13,7 @@ public interface IUsers {
 
    List<IRUser> getAll();
 
-   IDUser getWithID(final Integer id);
+   IRUser getWithID(final Integer id);
 
    int insert(final IRUser user);
 

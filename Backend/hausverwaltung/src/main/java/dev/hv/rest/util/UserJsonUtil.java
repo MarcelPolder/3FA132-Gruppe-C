@@ -51,11 +51,12 @@ public class UserJsonUtil implements IUsers{
 	}
 
 	@Override
-	public IDUser getWithID(Integer id) {
+	public IRUser getWithID(Integer id) {
 		Handle handle = connection.open();
 		
 		final IUserDAO dao = handle.attach(IUserDAO.class);
-		return dao.findById(id);
+		
+		return new RUser(dao.findById(id));
 	}
 
 	@Override
