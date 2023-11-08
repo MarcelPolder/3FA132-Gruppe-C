@@ -20,19 +20,19 @@ import lombok.ToString;
 @JsonTypeName(value = "user")
 public class RUser implements IRUser {
 
-	@JsonProperty
+	@JsonProperty(value = "id")
+	Integer Id;
+	
+	@JsonProperty(value = "firstname")
 	String Firstname;
 
-	@JsonProperty
-	Integer Id;
-
-	@JsonProperty
+	@JsonProperty(value = "lastname")
 	String Lastname;
 
-	@JsonProperty
+	@JsonProperty(value = "password")
 	String Password;
 
-	@JsonProperty
+	@JsonProperty(value = "token")
 	String Token;
 	
 	public RUser(IDUser dbUser) {
