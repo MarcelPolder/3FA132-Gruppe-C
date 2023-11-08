@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import dev.hv.db.model.IDUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,4 +34,12 @@ public class RUser implements IRUser {
 
 	@JsonProperty
 	String Token;
+	
+	public RUser(IDUser dbUser) {
+		setId(dbUser.getId());
+		setFirstname(dbUser.getFirstname());
+		setLastname(dbUser.getLastname());
+		setPassword(dbUser.getPassword());
+		setToken(dbUser.getToken());
+	}
 }
