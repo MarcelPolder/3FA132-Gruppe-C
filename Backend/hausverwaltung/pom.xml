@@ -16,6 +16,8 @@
 		<lombok.version>1.18.24</lombok.version>
 		<mariadb.version>3.1.1</mariadb.version>
 		<slf4j.version>1.7.36</slf4j.version>
+		<jersey.version>3.0.4</jersey.version>
+		<jackson.version>2.13.3</jackson.version>
 	</properties>
 	<build>
         <pluginManagement>
@@ -71,20 +73,6 @@
 			<version>3.43.0.0</version>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>org.duckdb</groupId>
-			<artifactId>duckdb_jdbc</artifactId>
-			<version>0.9.0</version>
-		</dependency>
-		-->
-
-		<!-- <dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<version>${mariadb.version}</version>
-		</dependency>
-		-->
-
 		<dependency>
 			<groupId>org.jdbi</groupId>
 			<artifactId>jdbi3-core</artifactId>
@@ -108,12 +96,49 @@
     		<artifactId>slf4j-api</artifactId>
     		<version>1.7.36</version>
 		</dependency>
+
 		<dependency>
     		<groupId>org.slf4j</groupId>
     		<artifactId>slf4j-simple</artifactId>
     		<version>1.7.36</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-jdk-http</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 </project>
