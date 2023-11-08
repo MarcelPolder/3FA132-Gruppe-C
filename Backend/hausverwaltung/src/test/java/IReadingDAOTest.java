@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -15,6 +16,7 @@ import dev.hv.db.dao.IReadingDAO;
 import dev.hv.db.init.IDb;
 import dev.hv.db.model.DReading;
 import dev.hv.db.model.IDCustomer;
+import dev.hv.db.model.DCustomer;
 import dev.hv.db.model.IDReading;
 
 public class IReadingDAOTest {
@@ -96,5 +98,79 @@ public class IReadingDAOTest {
         }
     }
 }
-}
+@Test
+	public void insert_test() {
+		Jdbi connection = IDb.getInstance().getJdbi();
+		connection.installPlugin(new SqlObjectPlugin());
+		connection.installPlugin(new GuavaPlugin());
 
+		Handle handle = connection.open();
+		try {
+			handle.begin();
+			int initialCount = handle.createQuery("SELECT COUNT(*) FROM reading").mapTo(Integer.class).findOnly();
+			
+			final IReadingDAO dao = handle.attach(IReadingDAO.class);
+			DReading cus = dao.findById(1);
+			
+			List<DReading> reading = dao.getAll();
+			int count = reading.size();
+			count++;
+			
+            DCustomer customer = new DCustomer(10000, "Max", "Mustermann");
+
+			cus.setCustomer(customer);
+
+			cus.setId(count);
+
+			int newId = dao.insert(cus);
+			
+			System.out.println("Added new Object at. " + newId);
+
+			int finalCount = handle.createQuery("SELECT COUNT(*) FROM reading").mapTo(Integer.class).findOnly();
+			assertEquals(initialCount + 1, finalCount);
+			System.out.println(initialCount);
+			System.out.println(finalCount);
+
+		} finally {
+			if (handle != null) {
+				handle.rollback();
+				handle.close();
+				System.out.println("Rolled Back Changes");
+			}
+		}
+	}
+	@Test
+	public void update_test() {
+		Jdbi connection = IDb.getInstance().getJdbi();
+		connection.installPlugin(new SqlObjectPlugin());
+		connection.installPlugin(new GuavaPlugin());
+
+		Handle handle = connection.open();
+		try {
+			handle.begin();			
+			final IReadingDAO dao = handle.attach(IReadingDAO.class);
+			
+			DReading reading = dao.findById(1);
+			String initname = reading.getKindOfMeter();
+			
+			String changeName = "Wasser2";
+			reading.setKindOfMeter(changeName);
+			
+			assertNotEquals(initname, changeName);
+			
+			
+			System.out.println("Old Name: " + initname);
+			System.out.println("New Name: " + changeName);
+
+		} finally {
+			if (handle != null) {
+				handle.rollback();
+				handle.close();
+				System.out.println("Rolled Back Changes");
+			}
+		}
+	}
+	
+	
+	
+}

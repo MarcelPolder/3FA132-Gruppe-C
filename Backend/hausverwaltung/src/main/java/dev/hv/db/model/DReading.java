@@ -3,6 +3,8 @@ package dev.hv.db.model;
 import java.beans.ConstructorProperties;
 import java.util.Date;
 
+import javax.annotation.Nullable;
+
 import org.jdbi.v3.core.mapper.Nested;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
@@ -17,32 +19,32 @@ public class DReading implements IDReading {
 
 	// Region Private Fields
 
-	@ColumnName("r_id")
+	@ColumnName("id")
 	private int Id;
 
-	@ColumnName("r_comment")
+	@ColumnName("comment")
 	private String Comment;
 
-	@ColumnName("r_date_of_reading")
+	@ColumnName("date_of_reading")
 	private Long DateOfReading;
 
-	@Nested
+	@Nested @Nullable
 	private IDCustomer Customer;
 
-	@ColumnName("r_kind_of_meter")
+	@ColumnName("kind_of_meter")
 	private String KindOfMeter;
 
-	@ColumnName("r_meter_count")
+	@ColumnName("meter_count")
 	private Double MeterCount;
 
-	@ColumnName("r_meter_id")
+	@ColumnName("meter_id")
 	private String MeterId;
 
-	@ColumnName("r_substitute")
+	@ColumnName("substitute")
 	private Boolean Substitute;
 
-	@ConstructorProperties({ "r_id", "r_comment", "r_date_of_reading", "c_id", "c_firstname", "c_lastname",
-			"r_kind_of_meter", "r_meter_count", "r_meter_id", "r_substitute" })
+	@ConstructorProperties({ "rid", "comment", "date_of_reading", "cid", "firstname", "lastname",
+			"kind_of_meter", "meter_count", "meter_id", "substitute" })
 	public DReading(final int id, final String _comment, final Long _dateofread, final int c_id,
 			final String c_firstname, final String c_lastname, final String _kindofMeter, final Double _meterCount,
 			final String _meterId, final Boolean _substitute) {
