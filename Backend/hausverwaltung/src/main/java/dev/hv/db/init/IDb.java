@@ -52,8 +52,8 @@ public class IDb implements IDbConnect {
 		if (this.jdbiInstance == null) {
 			Properties appProps = new Properties();
 			try {
-				appProps.load(new FileInputStream("src/main/resources/app.properties"));
-				this.jdbiInstance = this.getJdbi(appProps.getProperty("DB_URI"), appProps.getProperty("DB_USER"), appProps.getProperty("DB_PASS"));
+				appProps.load(new FileInputStream(getClass().getResource("/app.properties").getPath()));
+				this.jdbiInstance = this.getJdbi("jdbc:sqlite:"+getClass().getResource("/db/database.db").getPath(), "", "");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
