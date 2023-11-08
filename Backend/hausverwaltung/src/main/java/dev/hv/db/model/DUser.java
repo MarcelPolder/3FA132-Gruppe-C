@@ -4,6 +4,7 @@ import java.beans.ConstructorProperties;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
+import dev.hv.rest.model.IRUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,6 +46,14 @@ public class DUser implements IDUser {
 		Lastname = _lastname;
 		Password = _password;
 		Token = _token;
+	}
+	
+	public DUser(IRUser user) {
+		Id = user.getId();
+		Firstname = user.getFirstname();
+		Lastname = user.getLastname();
+		Password = user.getPassword();
+		Token = user.getToken();
 	}
 	
 	
