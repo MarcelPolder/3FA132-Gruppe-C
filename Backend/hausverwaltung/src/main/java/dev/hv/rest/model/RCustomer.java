@@ -20,13 +20,13 @@ import lombok.ToString;
 @JsonTypeName(value = "customer")
 public class RCustomer implements IRCustomer {
 
-	@JsonProperty
+	@JsonProperty(value = "id")
 	private Integer Id;
 
-	@JsonProperty
+	@JsonProperty(value = "firstname")
 	private String Firstname;
 
-	@JsonProperty
+	@JsonProperty(value = "lastname")
 	private String Lastname;
 
 	public RCustomer(DCustomer customer) {
