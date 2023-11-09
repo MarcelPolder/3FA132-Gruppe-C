@@ -7,6 +7,10 @@ import dev.hv.rest.util.UserJsonUtil;
 
 import java.util.List;
 
+import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
+import org.sqlite.SQLiteException;
+
+import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
@@ -49,50 +53,35 @@ public class UserResource {
 		util.delete(id);
 		return Response.status(Response.Status.OK).build();
 	}
-	
-	@PUT
+
+	@POST
 	@Path("create")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response createUser(
-		@FormParam("id") int id,
-		@FormParam("firstname") String firstname,
-		@FormParam("lastname") String lastname,
-		@FormParam("password") String password,
-		@FormParam("token") String token
-	) {
-		RUser user = new RUser(id, firstname, lastname, password, token);
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createUser(RUser user) {
+
 		UserJsonUtil util = new UserJsonUtil();
-		System.out.println(user.getId());
-		int created = util.insert(user);
-		if (created > 0) {
-			return Response.status(Response.Status.CREATED).entity(user).build();
+		try {
+			int created = util.insert(user);
+			if (created > 0) {
+				return Response.status(Response.Status.CREATED).entity(user).build();
+			}
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("There was an Error inserting the user into the database!").build();
+		} catch (UnableToExecuteStatementException sqLiteException) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("A User with the id "+user.getId()+" already exists!").build();
 		}
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("There was an Error inserting the user into the database!").build();
 	}
 
 	@POST
 	@Path("update/{id}")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateUser(
-		@PathParam("id") int id,
-		@FormParam("firstname") String firstname,
-		@FormParam("lastname") String lastname,
-		@FormParam("password") String password,
-		@FormParam("token") String token
-	) {
+	public Response updateUser(RUser user) {
 		UserJsonUtil util = new UserJsonUtil();
 		try {
-			IRUser user = util.getWithID(id);
-			if (firstname != null) user.setFirstname(firstname);
-			if (lastname != null) user.setLastname(lastname);
-			if (password != null) user.setPassword(password);
-			if (token != null) user.setToken(token);
 			util.update(user);
 			return Response.status(Response.Status.OK).entity(user).build();
 		} catch (NullPointerException eNullPointerException) {
-			return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the id "+id+" to update!").build();
+			return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the id "+user.getId()+" to update!").build();
 		}
 	}
 }
