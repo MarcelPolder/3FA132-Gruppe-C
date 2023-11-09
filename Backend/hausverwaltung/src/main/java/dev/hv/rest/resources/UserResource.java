@@ -50,18 +50,11 @@ public class UserResource {
 		return Response.status(Response.Status.OK).build();
 	}
 	
-	@PUT
+	@POST
 	@Path("create")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createUser(
-		@FormParam("id") int id,
-		@FormParam("firstname") String firstname,
-		@FormParam("lastname") String lastname,
-		@FormParam("password") String password,
-		@FormParam("token") String token
-	) {
-		RUser user = new RUser(id, firstname, lastname, password, token);
+	public Response createUser(RUser user) {
 		UserJsonUtil util = new UserJsonUtil();
 		System.out.println(user.getId());
 		int created = util.insert(user);

@@ -11,6 +11,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -49,16 +50,11 @@ public class CustomerRessource {
 		return Response.status(Response.Status.OK).build();
 	}
 	
-	@PUT
+	@POST
 	@Path("create")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createCustomer(
-		@FormParam("id") Integer id,
-		@FormParam("firstname") String firstname,
-		@FormParam("lastname") String lastname
-	) {
-		RCustomer customer = new RCustomer(id, firstname, lastname);
+	public Response createCustomer(RCustomer customer) {
 		CustomerJsonUtil util = new CustomerJsonUtil();
 		System.out.println(customer.getId());
 		int created = util.insert(customer);
