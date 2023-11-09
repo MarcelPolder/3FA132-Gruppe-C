@@ -15,7 +15,7 @@ public interface IReadings {
 
    List<IRReading> getAllfromCustomerID(Integer id);
 
-   IDReading getWithID(final Integer id);
+   IRReading getWithID(final Integer id);
 
    int insert(final IRReading user);
 

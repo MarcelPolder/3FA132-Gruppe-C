@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 import org.jdbi.v3.core.mapper.Nested;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
+import dev.hv.rest.model.IRReading;
+import dev.hv.rest.model.RCustomer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -67,5 +69,15 @@ public class DReading implements IDReading {
 		// ToDo: add logic of StringConversion based on input
 		return "";
 	}
+
+	public DReading(IRReading user) {
+		Comment = user.getComment();
+		Customer = new DCustomer(user.getCustomer());
+		DateOfReading = user.getDateofreading();
+		Id = user.getId();
+		KindOfMeter = user.getKindofmeter();
+		MeterCount = user.getMetercount();
+		MeterId = user.getMeterid();
+		Substitute = user.getSubstitute();	}
 
 }
