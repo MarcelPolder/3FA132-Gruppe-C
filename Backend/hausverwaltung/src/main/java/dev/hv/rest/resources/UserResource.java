@@ -57,7 +57,7 @@ public class UserResource {
 		@FormParam("password") String password,
 		@FormParam("token") String token
 	) {
-		RUser user = new RUser(firstname, id, lastname, password, password);
+		RUser user = new RUser(id, firstname, lastname, password, password);
 		UserJsonUtil util = new UserJsonUtil();
 		System.out.println(user.getId());
 		int created = util.insert(user);
