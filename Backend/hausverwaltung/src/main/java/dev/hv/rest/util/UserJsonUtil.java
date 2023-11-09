@@ -45,7 +45,7 @@ public class UserJsonUtil implements IUsers {
 		final IUserDAO dao = handle.attach(IUserDAO.class);
 		List<DUser> DatabaseUsers = dao.getAll();
 
-		List<IRUser> RestUsers = new ArrayList();
+		List<IRUser> RestUsers = new ArrayList<>();
 		for (DUser user : DatabaseUsers) {
 			RestUsers.add(new RUser(user));
 		}

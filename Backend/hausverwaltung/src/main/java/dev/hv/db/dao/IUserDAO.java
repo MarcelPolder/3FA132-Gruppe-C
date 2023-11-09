@@ -53,8 +53,9 @@ public interface IUserDAO extends IDAO<DUser> {
 	@Override
 	@SqlUpdate("""
 			UPDATE user
-			SET (firstname, lastname) 
-			Values(:user.firstname, :user.lastname)
+			SET
+				firstname=:user.firstname,
+				lastname=:user.lastname
 			WHERE id = :uid
 			""")
 	void update(@Bind("uid") int id, @BindBean("user") DUser o);
@@ -62,8 +63,9 @@ public interface IUserDAO extends IDAO<DUser> {
 	@Override
 	@SqlUpdate("""
 			UPDATE user
-			SET (firstname, lastname) 
-			Values(:user.firstname, :user.lastname)
+			SET 
+				firstname=:user.firstname,
+				lastname=:user.lastname
 			WHERE id = :user.id
 			""")
 	void update(@BindBean("user") DUser o);
