@@ -1,6 +1,5 @@
 package dev.hv.rest.resources;
 
-import dev.hv.db.model.IDUser;
 import dev.hv.rest.model.IRUser;
 import dev.hv.rest.model.RUser;
 import dev.hv.rest.util.UserJsonUtil;
@@ -12,7 +11,6 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
