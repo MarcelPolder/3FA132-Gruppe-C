@@ -25,8 +25,12 @@ public class UserResource {
 	@Path("get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserById(@PathParam("id") int id) {
-		IRUser user = (new UserJsonUtil()).getWithID(id);
-		return Response.status(Response.Status.OK).entity(user).build();
+		try {
+			IRUser user = (new UserJsonUtil()).getWithID(id);
+			return Response.status(Response.Status.OK).entity(user).build();
+		} catch (NullPointerException eNullPointerException) {
+			return Response.status(Response.Status.NO_CONTENT).entity("There is no user with id "+id+".").build();
+		}
 	}
 
 	@GET
@@ -64,7 +68,7 @@ public class UserResource {
 		if (created > 0) {
 			return Response.status(Response.Status.CREATED).entity(user).build();
 		}
-		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("There was an Error inserting the user into the database!").build();
 	}
 
 	@POST
@@ -79,12 +83,16 @@ public class UserResource {
 		@FormParam("token") String token
 	) {
 		UserJsonUtil util = new UserJsonUtil();
-		IRUser user = util.getWithID(id);
-		if (firstname != null) user.setFirstname(firstname);
-		if (lastname != null) user.setLastname(lastname);
-		if (password != null) user.setPassword(password);
-		if (token != null) user.setToken(token);
-		util.update(user);
-		return Response.status(Response.Status.OK).entity(user).build();
+		try {
+			IRUser user = util.getWithID(id);
+			if (firstname != null) user.setFirstname(firstname);
+			if (lastname != null) user.setLastname(lastname);
+			if (password != null) user.setPassword(password);
+			if (token != null) user.setToken(token);
+			util.update(user);
+			return Response.status(Response.Status.OK).entity(user).build();
+		} catch (NullPointerException eNullPointerException) {
+			return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the id "+id+" to update!").build();
+		}
 	}
 }
