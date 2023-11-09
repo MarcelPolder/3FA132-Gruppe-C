@@ -1,10 +1,15 @@
 package dev.hv.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import dev.hv.db.model.IDUser;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,22 +23,29 @@ import lombok.ToString;
 @ToString
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonTypeName(value = "user")
+@XmlRootElement(name = "user")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RUser implements IRUser {
 
-	@JsonProperty(value = "id")
-	Integer Id;
+	@JsonProperty
+	@XmlAttribute
+	int id;
 	
-	@JsonProperty(value = "firstname")
-	String Firstname;
+	@JsonProperty
+	@XmlAttribute
+	String firstname;
 
-	@JsonProperty(value = "lastname")
-	String Lastname;
+	@JsonProperty
+	@XmlAttribute
+	String lastname;
 
-	@JsonProperty(value = "password")
-	String Password;
+	@JsonProperty
+	@XmlAttribute
+	String password;
 
-	@JsonProperty(value = "token")
-	String Token;
+	@JsonProperty
+	@XmlAttribute
+	String token;
 	
 	public RUser(IDUser dbUser) {
 		setId(dbUser.getId());

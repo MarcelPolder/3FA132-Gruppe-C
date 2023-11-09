@@ -7,7 +7,7 @@ public interface IRUser {
 
    String getFirstname();
 
-   Integer getId();
+   int getId();
 
    String getLastname();
 
@@ -17,7 +17,7 @@ public interface IRUser {
 
    void setFirstname(String firstName);
 
-   void setId(Integer id);
+   void setId(int id);
 
    void setLastname(String lastName);
 
