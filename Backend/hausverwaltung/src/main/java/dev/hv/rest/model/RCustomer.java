@@ -1,11 +1,10 @@
 package dev.hv.rest.model;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import dev.hv.db.model.DCustomer;
 import lombok.AllArgsConstructor;
@@ -19,13 +18,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonTypeName(value = "customer")
 public class RCustomer implements IRCustomer {
-	
+
 	@JsonCreator
-	public RCustomer(Integer _id){
-		Id = _id;
+	public RCustomer(int id) {
+		setId(id);
 	}
 
 	@JsonProperty(value = "id")

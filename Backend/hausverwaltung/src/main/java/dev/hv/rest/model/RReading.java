@@ -24,8 +24,8 @@ public class RReading implements IRReading {
 	@JsonProperty(value = "comment")
 	String Comment;
 	
-	@JsonProperty (value = "customer")
-	IRCustomer Customer;
+	@JsonProperty (value = "customer_id")
+	RCustomer Customer;
 
 	@JsonProperty(value = "date_of_reading")
 	String Dateofreading;
@@ -60,6 +60,5 @@ public class RReading implements IRReading {
 		Meterid = user.getMeterId();
 		Substitute = user.getSubstitute();
 	}
-
 
 }
