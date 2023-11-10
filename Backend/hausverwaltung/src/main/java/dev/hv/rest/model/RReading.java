@@ -25,7 +25,7 @@ public class RReading implements IRReading {
 	String Comment;
 	
 	@JsonProperty (value = "customer_id")
-	RCustomer Customer;
+	IRCustomer Customer;
 
 	@JsonProperty(value = "date_of_reading")
 	String Dateofreading;

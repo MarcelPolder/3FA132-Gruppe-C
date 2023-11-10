@@ -33,7 +33,7 @@ public class ReadingResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUserById(@PathParam("id") int id) {
 		try {
-			IRReading reading = (new ReadingsJsonUtil()).getWithID(id);
+			IRReading reading = new ReadingsJsonUtil().getWithID(id);
 			return Response.status(Response.Status.OK).entity(reading).build();
 		} catch (NullPointerException eNullPointerException) {
 			return Response.status(Response.Status.NO_CONTENT).entity("There is no reading with id "+id+".").build();

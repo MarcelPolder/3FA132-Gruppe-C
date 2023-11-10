@@ -7,7 +7,7 @@ public interface IRReading {
 
    String getComment();
 
-   RCustomer getCustomer();
+   IRCustomer getCustomer();
 
    String getDateofreading();
 
@@ -25,7 +25,7 @@ public interface IRReading {
 
    void setComment(String comment);
 
-   void setCustomer(RCustomer customer);
+   void setCustomer(IRCustomer customer);
 
    void setDateofreading(String dateOfReading);
 
