@@ -1,5 +1,8 @@
 package dev.hv.rest.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,6 +22,11 @@ import lombok.ToString;
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonTypeName(value = "customer")
 public class RCustomer implements IRCustomer {
+	
+	@JsonCreator
+	public RCustomer(Integer _id){
+		Id = _id;
+	}
 
 	@JsonProperty(value = "id")
 	private Integer Id;
@@ -28,7 +36,7 @@ public class RCustomer implements IRCustomer {
 
 	@JsonProperty(value = "lastname")
 	private String Lastname;
-
+	
 	public RCustomer(DCustomer customer) {
 		Id = customer.getId();
 		Firstname = customer.getFirstname();

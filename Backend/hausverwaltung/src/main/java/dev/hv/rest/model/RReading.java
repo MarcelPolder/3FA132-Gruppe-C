@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import dev.hv.db.model.DCustomer;
 import dev.hv.db.model.DReading;
-import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
