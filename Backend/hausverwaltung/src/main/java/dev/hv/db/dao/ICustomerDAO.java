@@ -54,18 +54,20 @@ public interface ICustomerDAO extends IDAO<DCustomer> {
 
 	@Override
 	@SqlUpdate("""
-			UPDATE customers
-			SET (vorname, nachname) 
-			Values(:cus.Vorname, :cus.Nachname)
+			UPDATE customer
+			SET
+				vorname=:cus.firstname,
+				nachname=:cus.lastname
 			WHERE id = :cid
 			""")
 	void update(@Bind("cid") int id, @BindBean("cus") DCustomer o);
 
 	@Override
 	@SqlUpdate("""
-			UPDATE customers
-			SET (vorname, nachname) 
-			Values(:cus.vorname, :cus.nachname)
+			UPDATE customer
+			SET
+				vorname=:cus.firstname,
+				nachname=:cus.lastname
 			WHERE id = :cus.id
 			""")
 	void update(@BindBean("cus") DCustomer o);
