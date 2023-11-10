@@ -28,7 +28,7 @@ public class DReading implements IDReading {
 	private String Comment;
 
 	@ColumnName("date_of_reading")
-	private Long DateOfReading;
+	private String DateOfReading;
 
 	@Nested @Nullable
 	private IDCustomer Customer;
@@ -37,19 +37,19 @@ public class DReading implements IDReading {
 	private String KindOfMeter;
 
 	@ColumnName("meter_count")
-	private Double MeterCount;
+	private int MeterCount;
 
 	@ColumnName("meter_id")
 	private String MeterId;
 
 	@ColumnName("substitute")
-	private Boolean Substitute;
+	private int Substitute;
 
 	@ConstructorProperties({ "rid", "comment", "date_of_reading", "cid", "firstname", "lastname",
 			"kind_of_meter", "meter_count", "meter_id", "substitute" })
-	public DReading(final int id, final String _comment, final Long _dateofread, final int c_id,
-			final String c_firstname, final String c_lastname, final String _kindofMeter, final Double _meterCount,
-			final String _meterId, final Boolean _substitute) {
+	public DReading(final int id, final String _comment, final String _dateofread, final int c_id,
+			final String c_firstname, final String c_lastname, final String _kindofMeter, final int _meterCount,
+			final String _meterId, final int _substitute) {
 
 		Id = id;
 		Comment = _comment;

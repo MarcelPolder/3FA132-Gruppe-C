@@ -9,17 +9,17 @@ public interface IRReading {
 
    IRCustomer getCustomer();
 
-   Long getDateofreading();
+   String getDateofreading();
 
    Integer getId();
 
    String getKindofmeter();
 
-   Double getMetercount();
+   Integer getMetercount();
 
    String getMeterid();
 
-   Boolean getSubstitute();
+   Integer getSubstitute();
 
    String printDateofreading();
 
@@ -27,16 +27,16 @@ public interface IRReading {
 
    void setCustomer(IRCustomer customer);
 
-   void setDateofreading(Long dateOfReading);
+   void setDateofreading(String dateOfReading);
 
    void setId(Integer id);
 
    void setKindofmeter(String kindOfMeter);
 
-   void setMetercount(Double meterCount);
+   void setMetercount(Integer meterCount);
 
    void setMeterid(String meterId);
 
-   void setSubstitute(Boolean substitute);
+   void setSubstitute(Integer substitute);
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import dev.hv.db.model.DCustomer;
 import dev.hv.db.model.DReading;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,29 +22,29 @@ import lombok.ToString;
 @JsonTypeName(value = "reading")
 public class RReading implements IRReading {
 
-	@JsonProperty
+	@JsonProperty(value = "comment")
 	String Comment;
 	
-	@JsonProperty
+	@JsonProperty (value = "customer")
 	IRCustomer Customer;
 
-	@JsonProperty
-	Long Dateofreading;
+	@JsonProperty(value = "date_of_reading")
+	String Dateofreading;
 
-	@JsonProperty
+	@JsonProperty(value = "id")
 	Integer Id;
 
-	@JsonProperty
+	@JsonProperty(value = "kind_of_meter")
 	String Kindofmeter;
 
-	@JsonProperty
-	Double Metercount;
+	@JsonProperty(value = "meter_count")
+	Integer Metercount;
 
-	@JsonProperty
+	@JsonProperty(value = "meter_id")
 	String Meterid;
 
-	@JsonProperty
-	Boolean Substitute;
+	@JsonProperty(value = "substitute")
+	Integer Substitute;
 	
 	@Override
 	public String printDateofreading() {
