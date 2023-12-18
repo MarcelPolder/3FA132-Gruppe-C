@@ -57,8 +57,10 @@ public class ReadingsJsonUtil implements IReadings {
 		Handle handle = connection.open();
 
 		final IReadingDAO dao = handle.attach(IReadingDAO.class);
+		
+		DReading read = dao.findById(id);
 
-		return new RReading(dao.findById(id));
+		return new RReading(read);
 	}
 
 	@Override

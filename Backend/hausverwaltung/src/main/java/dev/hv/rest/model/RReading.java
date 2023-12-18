@@ -52,13 +52,16 @@ public class RReading implements IRReading {
 
 	public RReading(DReading user) {
 		Comment = user.getComment();
-		Customer = new RCustomer((DCustomer) user.getCustomer());
 		Dateofreading = user.getDateOfReading();
 		Id = user.getId();
 		Kindofmeter = user.getKindOfMeter();
 		Metercount = user.getMeterCount();
 		Meterid = user.getMeterId();
 		Substitute = user.getSubstitute();
+		
+		if(user.getCustomer() != null) {
+			Customer = new RCustomer((DCustomer) user.getCustomer());
+		}
 	}
 
 }

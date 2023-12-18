@@ -86,7 +86,7 @@ public class ReadingResource {
 	
 	@POST
 	@Path("update/{id}")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateUser(@PathParam("id") int id, RReading reading) {
 		ReadingsJsonUtil util = new ReadingsJsonUtil();
@@ -98,8 +98,8 @@ public class ReadingResource {
 			IRReading dbReading = util.getWithID(id);
 			if (reading.getComment() != null)
 				dbReading.setComment(reading.getComment());
-			//if (reading.getCustomer() != null)
-			//	dbReading.setCustomer(reading.getCustomer());
+			if (reading.getCustomer() != null)
+				dbReading.setCustomer(reading.getCustomer());
 			if (reading.getDateofreading() != null)
 				dbReading.setDateofreading(reading.getDateofreading());
 			if (reading.getId() != null)

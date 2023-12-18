@@ -29,8 +29,10 @@ public interface IReadingDAO extends IDAO<DReading> {
 
 	@Override
 	@SqlQuery("""
-			SELECT * FROM reading
-			WHERE id = :rid
+			SELECT  r.id as id, r.comment as comment, r.customer_id as customer_id, r.date_of_reading as date_of_reading,
+			r.kind_of_meter as kind_of_meter, r.meter_count as meter_count, r.meter_id as meter_id,  r.substitute as substitute
+			FROM reading r
+			WHERE r.id = :rid
 			""")
 	@RegisterBeanMapper(DReading.class)
 	DReading findById(@Bind("rid") int id);
