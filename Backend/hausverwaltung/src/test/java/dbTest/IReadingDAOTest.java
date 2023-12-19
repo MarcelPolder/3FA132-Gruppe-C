@@ -53,9 +53,13 @@ public class IReadingDAOTest {
 			handle.begin();
 
 			final IReadingDAO dao = handle.attach(IReadingDAO.class);
+			final ICustomerDAO cus_dao = handle.attach(ICustomerDAO.class);
+			
 			IDReading reading = dao.findById((1));
-
+			
+			
 			if (reading != null) {
+				reading.setCustomer(cus_dao.findById(reading.getCid()));
 				System.out.println(reading.getKindOfMeter());
 			} else {
 				assertEquals(reading, 1);

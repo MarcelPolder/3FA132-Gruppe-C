@@ -58,7 +58,9 @@ public class ReadingResource {
 				System.out.println(reading.getId());
 				int created = util.insert(reading);
 				if (created > 0) {
-					return Response.status(Response.Status.CREATED).entity(reading).build();
+					IRReading read = util.getWithID(reading.getId());
+					
+					return Response.status(Response.Status.CREATED).entity(read).build();
 				}
 				return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 						.entity("There was an Error inserting the reading into the database!").build();
@@ -90,6 +92,8 @@ public class ReadingResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateUser(@PathParam("id") int id, RReading reading) {
 		ReadingsJsonUtil util = new ReadingsJsonUtil();
+		CustomerJsonUtil cus_util = new CustomerJsonUtil();
+		
 		try {
 			if (reading == null) {
 				return Response.status(Response.Status.BAD_REQUEST)
@@ -98,8 +102,6 @@ public class ReadingResource {
 			IRReading dbReading = util.getWithID(id);
 			if (reading.getComment() != null)
 				dbReading.setComment(reading.getComment());
-			if (reading.getCustomer() != null)
-				dbReading.setCustomer(reading.getCustomer());
 			if (reading.getDateofreading() != null)
 				dbReading.setDateofreading(reading.getDateofreading());
 			if (reading.getId() != null)
@@ -112,6 +114,10 @@ public class ReadingResource {
 				dbReading.setMeterid(reading.getMeterid());
 			if (reading.getSubstitute() != null)
 				dbReading.setSubstitute(reading.getSubstitute());
+			
+			if (reading.getCustomer() != null)
+				dbReading.setCustomer(cus_util.getWithID(reading.getCustomer().getId()));
+			
 			util.update(dbReading);
 			return Response.status(Response.Status.OK).entity(dbReading).build();
 		} catch (NullPointerException eNullPointerException) {

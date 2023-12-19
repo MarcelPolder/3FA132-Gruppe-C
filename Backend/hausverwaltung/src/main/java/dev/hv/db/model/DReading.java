@@ -8,8 +8,11 @@ import javax.annotation.Nullable;
 import org.jdbi.v3.core.mapper.Nested;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import dev.hv.rest.model.IRReading;
 import dev.hv.rest.model.RCustomer;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Data
 public class DReading implements IDReading {
 
 	// Region Private Fields
@@ -30,8 +34,11 @@ public class DReading implements IDReading {
 	@ColumnName("date_of_reading")
 	private String DateOfReading;
 
-	@Nested @Nullable
-	private IDCustomer Customer;
+	@ColumnName("cid")
+	private int Cid;
+
+	@Nullable
+	public IDCustomer Customer;
 
 	@ColumnName("kind_of_meter")
 	private String KindOfMeter;
@@ -45,11 +52,10 @@ public class DReading implements IDReading {
 	@ColumnName("substitute")
 	private int Substitute;
 
-	@ConstructorProperties({ "rid", "comment", "date_of_reading", "cid", "firstname", "lastname",
-			"kind_of_meter", "meter_count", "meter_id", "substitute" })
-	public DReading(final int id, final String _comment, final String _dateofread, final int c_id,
-			final String c_firstname, final String c_lastname, final String _kindofMeter, final int _meterCount,
-			final String _meterId, final int _substitute) {
+	@ConstructorProperties({ "id", "comment", "cid", "date_of_reading", "kind_of_meter", "meter_count", "meter_id",
+			"substitute" })
+	public DReading(final int id, final String _comment, final int cid, final String _dateofread,
+			final String _kindofMeter, final int _meterCount, final String _meterId, final int _substitute) {
 
 		Id = id;
 		Comment = _comment;
@@ -58,9 +64,10 @@ public class DReading implements IDReading {
 		MeterCount = _meterCount;
 		MeterId = _meterId;
 		Substitute = _substitute;
-		
-		if (c_id != 0) {
-			Customer = new DCustomer(c_id, c_firstname, c_lastname);
+		Cid = cid;
+
+		if (cid != 0) {
+			Customer = new DCustomer(cid, "", "");
 		}
 	}
 
@@ -68,6 +75,22 @@ public class DReading implements IDReading {
 	public String printDateofreading() {
 		// ToDo: add logic of StringConversion based on input
 		return "";
+	}
+
+	DReading(final int id, final String _comment, final String _dateofread, final String _kindofMeter,
+			final int _meterCount, final String _meterId, final int _substitute, IDCustomer customer) {
+		Id = id;
+		Comment = _comment;
+		DateOfReading = _dateofread;
+		KindOfMeter = _kindofMeter;
+		MeterCount = _meterCount;
+		MeterId = _meterId;
+		Substitute = _substitute;
+
+		if (customer != null) {
+			Cid = customer.getId();
+			Customer = customer;
+		}
 	}
 
 	public DReading(IRReading user) {
@@ -78,6 +101,8 @@ public class DReading implements IDReading {
 		KindOfMeter = user.getKindofmeter();
 		MeterCount = user.getMetercount();
 		MeterId = user.getMeterid();
-		Substitute = user.getSubstitute();	}
+		Substitute = user.getSubstitute();
+		Cid = user.getCustomer().getId();
+	}
 
 }

@@ -2,38 +2,42 @@ package dev.hv.db.model;
 
 public interface IDReading {
 
-   String getComment();
+	String getComment();
 
-   IDCustomer getCustomer();
+	IDCustomer getCustomer();
 
-   String getDateOfReading();
+	String getDateOfReading();
 
-   int getId();
+	int getId();
 
-   String getKindOfMeter();
+	String getKindOfMeter();
 
-   int getMeterCount();
+	int getMeterCount();
 
-   String getMeterId();
+	String getMeterId();
 
-   int getSubstitute();
+	int getSubstitute();
 
-   String printDateofreading();
+	String printDateofreading();
 
-   void setComment(String comment);
+	int getCid();
 
-   void setCustomer(IDCustomer customer);
+	void setComment(String comment);
 
-   void setDateOfReading(String dateOfReading);
+	void setCustomer(IDCustomer customer);
 
-   void setId(int id);
+	void setDateOfReading(String dateOfReading);
 
-   void setKindOfMeter(String kindOfMeter);
+	void setId(int id);
 
-   void setMeterCount(int meterCount);
+	void setKindOfMeter(String kindOfMeter);
 
-   void setMeterId(String meterId);
+	void setMeterCount(int meterCount);
 
-   void setSubstitute(int substitute);
+	void setMeterId(String meterId);
+
+	void setSubstitute(int substitute);
+
+	void setCid(int cid);
 
 }

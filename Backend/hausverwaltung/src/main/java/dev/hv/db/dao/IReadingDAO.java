@@ -1,5 +1,7 @@
 package dev.hv.db.dao;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 import java.util.List;
 
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
@@ -29,17 +31,19 @@ public interface IReadingDAO extends IDAO<DReading> {
 
 	@Override
 	@SqlQuery("""
-			SELECT  r.id as id, r.comment as comment, r.customer_id as customer_id, r.date_of_reading as date_of_reading,
-			r.kind_of_meter as kind_of_meter, r.meter_count as meter_count, r.meter_id as meter_id,  r.substitute as substitute
-			FROM reading r
-			WHERE r.id = :rid
+			SELECT r.id as id, r.comment as comment, r.customer_id as cid, r.date_of_reading as date_of_reading, r.kind_of_meter as kind_of_meter,
+			r.meter_count as meter_count, r.meter_id as meter_id, r.substitute as substitute
+			from reading r
+			WHERE id = :rid
 			""")
 	@RegisterBeanMapper(DReading.class)
 	DReading findById(@Bind("rid") int id);
 
 	@Override
 	@SqlQuery("""
-			SELECT * FROM reading
+			SELECT r.id as id, r.comment as comment, r.customer_id as cid, r.date_of_reading as date_of_reading, r.kind_of_meter as kind_of_meter,
+			r.meter_count as meter_count, r.meter_id as meter_id, r.substitute as substitute
+			from reading r
 			""")
 	@RegisterBeanMapper(DReading.class)
 	List<DReading> getAll();
@@ -47,7 +51,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 	@Override
 	@SqlUpdate("""
 			INSERT INTO reading
-			(id, comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute) 
+			(id, comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute)
 			Values(:read.id, :read.comment, :read.customer.id, :read.dateOfReading, :read.kindOfMeter, :read.meterCount, :read.meterId, :read.substitute)
 			""")
 	int insert(@BindBean("read") DReading o);
@@ -55,7 +59,7 @@ public interface IReadingDAO extends IDAO<DReading> {
 	@Override
 	@SqlUpdate("""
 			UPDATE reading
-			SET (comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute) 
+			SET (comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute)
 			Values(:read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
 			WHERE id = :rid
 			""")
@@ -64,8 +68,14 @@ public interface IReadingDAO extends IDAO<DReading> {
 	@Override
 	@SqlUpdate("""
 			UPDATE reading
-			SET (comment, customer_id, date_of_reading, kind_of_meter, meter_count, meter_id, substitute) 
-			Values(:read.Comment, :read.Customer.Id, :read.DateOfReading, :read.KindOfMeter, :read.MeterCount, :read.MeterId, :read.Substitute)
+			SET
+				comment=:read.comment,
+				customer_id=:read.customer.id,
+				date_of_reading=:read.dateOfReading,
+				kind_of_meter=:read.kindOfMeter,
+				meter_count=:read.meterCount,
+				meter_id=:read.meterId,
+				substitute=:read.substitute
 			WHERE id = :read.id
 			""")
 	void update(@BindBean("read") DReading o);
