@@ -52,5 +52,8 @@ public class RestClientTest {
 
         // Assert that the HTTP status code is as expected (201 for successful creation)
         assertEquals(201, statusCode);
+
+
+        
     }
 }
