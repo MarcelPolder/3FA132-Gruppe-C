@@ -1,6 +1,7 @@
 package restTest;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import dev.hv.rest.model.IRCustomer;
