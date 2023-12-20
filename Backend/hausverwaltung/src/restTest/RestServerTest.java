@@ -1,4 +1,4 @@
-package dbTest;
+package restTest;
 
 import dev.hv.rest.Server;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.junit.Test;
 public class RestServerTest {
 
     @Test
-    public void testMainMethod() {
+    public void startServerTest() {
         Server.main(null);
 
     }
