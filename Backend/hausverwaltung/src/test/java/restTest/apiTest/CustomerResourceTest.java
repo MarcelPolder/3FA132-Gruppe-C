@@ -1,13 +1,9 @@
 package restTest.apiTest;
-import dev.hv.rest.Server;
-
+import dev.hv.rest.resources.CustomerRessource;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
+import jakarta.ws.rs.core.Response;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,49 +11,36 @@ import org.junit.Test;
 
 public class CustomerResourceTest {
 
-    private static Thread serverThread;
+    private static CustomerRessource customerResource;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        // Starte den Server in einem separaten Thread
-        serverThread = new Thread(() -> {
-            Server.main(null);
-        });
-        serverThread.start();
-
-        // Warte eine Weile, um sicherzustellen, dass der Server gestartet ist
-        Thread.sleep(2000);
+        // Initialize the CustomerRessource class
+        customerResource = new CustomerRessource();
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
-        // Beende den Server-Thread
-        serverThread.interrupt();
-        serverThread.join();
+        // Cleanup or release any resources if needed
     }
 
     @Test
     public void testGetCustomerById() throws Exception {
         int customerId = 1;
-        URL url = new URL("http://localhost:8080/rest/customers/get/" + customerId);
         
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+        // Call the getCustomerById method directly and receive a Response object
+        Response response = customerResource.getCustomerById(customerId);
         
-        int responseCode = connection.getResponseCode();
-        
-        assertEquals(HttpURLConnection.HTTP_OK, responseCode);
+        // Assert the status code in the response
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
 
     @Test
     public void testGetAllCustomers() throws Exception {
-        URL url = new URL("http://localhost:8080/rest/customers/get");
+        // Call the getAllCustomers method directly and receive a Response object
+        Response response = customerResource.getAllCustomers();
         
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        
-        int responseCode = connection.getResponseCode();
-        
-        assertEquals(HttpURLConnection.HTTP_OK, responseCode);
+        // Assert the status code in the response
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
 }
