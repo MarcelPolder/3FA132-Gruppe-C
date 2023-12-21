@@ -7,7 +7,6 @@ import dev.hv.db.model.DCustomer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class RCustomerTest {
 
@@ -16,8 +15,12 @@ public class RCustomerTest {
         // Create an instance of RCustomer using the constructor with id
         RCustomer customer = new RCustomer(1);
 
-               assertTrue(true);
+        // Verify the id
+        assertEquals(Integer.valueOf(1), customer.getId());
 
+        // Verify other values (should be null as not set)
+        assertNull(customer.getFirstname());
+        assertNull(customer.getLastname());
     }
 
     @Test
@@ -32,8 +35,9 @@ public class RCustomerTest {
         RCustomer customer = new RCustomer(dCustomer);
 
         // Verify the values converted from DCustomer
-        assertTrue(true);
-
+        assertEquals(Integer.valueOf(1), customer.getId());
+        assertEquals("John", customer.getFirstname());
+        assertEquals("Doe", customer.getLastname());
     }
 
     @Test
@@ -47,7 +51,8 @@ public class RCustomerTest {
         customer.setLastname("Doe");
 
         // Verify the values using the getter methods
-        assertTrue(true);
-
+        assertEquals(Integer.valueOf(1), customer.getId());
+        assertEquals("John", customer.getFirstname());
+        assertEquals("Doe", customer.getLastname());
     }
 }

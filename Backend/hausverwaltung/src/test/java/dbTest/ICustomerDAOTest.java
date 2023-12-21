@@ -2,7 +2,6 @@ package dbTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class ICustomerDAOTest {
 			dao.delete(1);
 
 			int finalCount = handle.createQuery("SELECT COUNT(*) FROM customer").mapTo(Integer.class).findOnly();
-			assertTrue(true);
+			assertEquals(initialCount - 1, finalCount);
 			System.out.println(initialCount);
 			System.out.println(finalCount);
 
@@ -65,7 +64,7 @@ public class ICustomerDAOTest {
 			if (customer != null) {
 				System.out.println(customer.getFirstname());
 			} else {
-				assertTrue(true);
+				assertEquals(customer, 1);
 			}
 
 		} finally {
@@ -92,7 +91,7 @@ public class ICustomerDAOTest {
 			if (customer != null) {
 				System.out.println("Size of List: " + customer.size());
 			} else {
-        assertTrue(true);
+				assertEquals(customer, 1);
 			}
 
 		} finally {
@@ -128,7 +127,7 @@ public class ICustomerDAOTest {
 			System.out.println("Added new Object at. " + newId);
 
 			int finalCount = handle.createQuery("SELECT COUNT(*) FROM customer").mapTo(Integer.class).findOnly();
-			assertTrue(true);
+			assertEquals(initialCount + 1, finalCount);
 			System.out.println(initialCount);
 			System.out.println(finalCount);
 
@@ -158,7 +157,7 @@ public class ICustomerDAOTest {
 			String changeName = "Marcel";
 			cus.setFirstname(changeName);
 			
-			assertTrue(true);
+			assertNotEquals(initname, changeName);
 			
 			
 			System.out.println("Old Name: " + initname);

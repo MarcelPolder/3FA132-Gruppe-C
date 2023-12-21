@@ -1,7 +1,6 @@
 package restTest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -21,7 +20,8 @@ public class IRCustomerTest {
         customer.setId(1);
 
         // Verify the values using the getter methods
-                assertTrue(true);
-
+        assertEquals("John", customer.getFirstname());
+        assertEquals("Doe", customer.getLastname());
+        assertEquals(Integer.valueOf(1), customer.getId());
     }
 }

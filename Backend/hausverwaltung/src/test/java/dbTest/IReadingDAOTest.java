@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class IReadingDAOTest {
             dao.delete(1);
 
             int finalCount = handle.createQuery("SELECT COUNT(*) FROM reading").mapTo(Integer.class).findOnly();
-        assertTrue(true);
+            assertEquals(initialCount - 1, finalCount);
 
             handle.rollback();  // Rollback any changes made during this test
         }
@@ -63,7 +62,7 @@ public class IReadingDAOTest {
 				reading.setCustomer(cus_dao.findById(reading.getCid()));
 				System.out.println(reading.getKindOfMeter());
 			} else {
-				assertTrue(true);
+				assertEquals(reading, 1);
 			}
 
 		} finally {
@@ -87,7 +86,8 @@ public class IReadingDAOTest {
         final IReadingDAO dao = handle.attach(IReadingDAO.class);
         List<DReading> readings = dao.getAll();
 
-		assertTrue(true);
+        assertNotNull("Readings list should not be null", readings);
+        assertFalse("Readings list should not be empty", readings.isEmpty());
 
         System.out.println("Size of List: " + readings.size());
 
@@ -133,7 +133,7 @@ public class IReadingDAOTest {
 			System.out.println("Added new Object at. " + newId);
 
 			int finalCount = handle.createQuery("SELECT COUNT(*) FROM reading").mapTo(Integer.class).findOnly();
-			assertTrue(true);
+			assertEquals(initialCount + 1, finalCount);
 			System.out.println(initialCount);
 			System.out.println(finalCount);
 
@@ -162,7 +162,7 @@ public class IReadingDAOTest {
 			String changeName = "Wasser2";
 			reading.setKindOfMeter(changeName);
 			
-			assertTrue(true);
+			assertNotEquals(initname, changeName);
 			
 			
 			System.out.println("Old Name: " + initname);

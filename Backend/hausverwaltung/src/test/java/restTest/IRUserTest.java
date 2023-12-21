@@ -7,7 +7,6 @@ import dev.hv.rest.model.RUser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class IRUserTest {
 
@@ -24,8 +23,11 @@ public class IRUserTest {
         user.setToken("exampleToken");
 
         // Verify the values using the getter methods
-               assertTrue(true);
-
+        assertEquals("John", user.getFirstname());
+        assertEquals("Doe", user.getLastname());
+        assertEquals(1, user.getId());
+        assertEquals("securePassword", user.getPassword());
+        assertEquals("exampleToken", user.getToken());
     }
 
     @Test
@@ -34,7 +36,10 @@ public class IRUserTest {
         IRUser user = new RUser();
 
         // Verify default values (assuming your implementation initializes default values)
-        assertTrue(true);
-
+        assertNull(user.getFirstname());
+        assertNull(user.getLastname());
+        assertEquals(0, user.getId());
+        assertNull(user.getPassword());
+        assertNull(user.getToken());
     }
 }

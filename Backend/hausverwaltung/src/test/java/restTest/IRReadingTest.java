@@ -11,7 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class IRReadingTest {
 
@@ -31,8 +30,16 @@ public class IRReadingTest {
         reading.setSubstitute(2);
 
         // Verify the values using the getter methods
-               assertTrue(true);
+        assertEquals("Sample comment", reading.getComment());
+        assertEquals("2023-01-01", reading.getDateofreading());
+        assertEquals(Integer.valueOf(1), reading.getId());
+        assertEquals("Electric", reading.getKindofmeter());
+        assertEquals(Integer.valueOf(100), reading.getMetercount());
+        assertEquals("Meter123", reading.getMeterid());
+        assertEquals(Integer.valueOf(2), reading.getSubstitute());
 
+        // Verify the customer
+        assertNotNull(reading.getCustomer()); 
     
     }
 
@@ -41,7 +48,13 @@ public class IRReadingTest {
         // Create an instance of a class implementing IRReading
         IRReading reading = new RReading();
 
-        assertTrue(true);
-
+        assertNull(reading.getComment());
+        assertNull(reading.getDateofreading());
+        assertNull(reading.getId());
+        assertNull(reading.getKindofmeter());
+        assertNull(reading.getMetercount());
+        assertNull(reading.getMeterid());
+        assertNull(reading.getSubstitute());
+        assertNull(reading.getCustomer());
     }
 }
