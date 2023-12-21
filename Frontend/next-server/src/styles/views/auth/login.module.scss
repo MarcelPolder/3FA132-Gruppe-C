@@ -1,0 +1,48 @@
+.page {
+	display: grid;
+	align-items: center;
+	height: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 24px;
+
+	.box {
+		max-width: 350px;
+		margin: 0 auto;
+		display: grid;
+		gap: 24px;
+		justify-items: center;
+		border: 1px solid var(--md-sys-color-outline);
+		border-radius: 24px;
+		padding: 24px;
+
+		form {
+			button {
+				margin-top: 24px;
+			}
+		}
+
+		.claim {
+			width: 100%;
+
+			p {
+				text-align: center;
+			}
+
+			.authors {
+				border-top: 1px solid var(--md-sys-color-secondary);
+				border-bottom: 1px solid var(--md-sys-color-secondary);
+				padding: 12px 0px;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+	
+				span:nth-child(odd) {
+					text-align: left;
+				}
+				span:nth-child(even) {
+					text-align: right;
+				}
+			}
+		}
+	}
+}

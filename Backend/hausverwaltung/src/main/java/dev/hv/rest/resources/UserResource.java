@@ -99,4 +99,16 @@ public class UserResource {
 					.entity("There is no user with the id " + id + " to update!").build();
 		}
 	}
+
+	@POST
+	@Path("authenticate")
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response authenticateUser(
+		@FormParam("username") String username,
+		@FormParam("password") String password
+	) {
+		// TODO: Implement
+		return Response.status(Response.Status.OK).entity(true).build();
+	}
 }
