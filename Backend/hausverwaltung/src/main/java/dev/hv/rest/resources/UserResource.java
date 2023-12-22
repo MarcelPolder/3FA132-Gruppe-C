@@ -108,7 +108,24 @@ public class UserResource {
 		@FormParam("username") String username,
 		@FormParam("password") String password
 	) {
+		UserJsonUtil util = new UserJsonUtil();
 		// TODO: Implement
+		for (int i = 0; i>1 ; i++) {
+			if (username != null) {
+				IRUser user = util.getWithID(i);
+				String fullUser = user.getFirstname().concat(user.getLastname());
+				if (fullUser == username) {
+					if (password == user.getPassword()) {
+						return Response.status(Response.Status.OK).entity(true).build();
+					} else {
+						return Response.status(Response.Status.UNAUTHORIZED).entity(fullUser).build();
+					}
+				} else {
+					return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the username " + fullUser + " to update!").build();
+				}
+			}
+		}
+		//else 403	
 		return Response.status(Response.Status.OK).entity(true).build();
 	}
 }
