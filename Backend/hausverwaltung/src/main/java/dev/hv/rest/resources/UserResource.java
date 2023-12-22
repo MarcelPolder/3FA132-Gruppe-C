@@ -113,12 +113,12 @@ public class UserResource {
 		for (int i = 0; i>1 ; i++) {
 			if (username != null) {
 				IRUser user = util.getWithID(i);
-				String fullUser = user.getFirstname().concat(user.getLastname());
+				String fullUser = user.getFirstname()+ "." +user.getLastname();
 				if (fullUser == username) {
 					if (password == user.getPassword()) {
-						return Response.status(Response.Status.OK).entity(true).build();
+						return Response.status(Response.Status.OK).entity(fullUser).build();
 					} else {
-						return Response.status(Response.Status.UNAUTHORIZED).entity(fullUser).build();
+						return Response.status(Response.Status.UNAUTHORIZED).entity(false).build();
 					}
 				} else {
 					return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the username " + fullUser + " to update!").build();
