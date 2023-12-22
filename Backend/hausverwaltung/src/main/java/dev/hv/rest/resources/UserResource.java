@@ -109,9 +109,8 @@ public class UserResource {
 		@FormParam("password") String password
 	) {
 		UserJsonUtil util = new UserJsonUtil();
-		// TODO: Implement
-		for (int i = 0; i>1 ; i++) {
-			if (username != null) {
+		if (username != null) {
+			for (int i = 0; i>2 ; i++) {
 				IRUser user = util.getWithID(i);
 				String fullUser = user.getFirstname()+ "." +user.getLastname();
 				if (fullUser == username) {
@@ -121,11 +120,12 @@ public class UserResource {
 						return Response.status(Response.Status.UNAUTHORIZED).entity(false).build();
 					}
 				} else {
-					return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the username " + fullUser + " to update!").build();
+					return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the username " + fullUser).build();
 				}
 			}
+		} else {
+			return Response.status(Response.Status.NO_CONTENT).entity("There are no users in username field").build();
 		}
-		//else 403	
-		return Response.status(Response.Status.OK).entity(true).build();
+		return Response.status(Response.Status.NO_CONTENT).entity("There are no users in the DB").build();
 	}
 }
