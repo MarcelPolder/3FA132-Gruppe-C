@@ -110,7 +110,7 @@ public class UserResource {
 	) {
 		UserJsonUtil util = new UserJsonUtil();
 		if (username != null) {
-			for (int i = 0; i>2 ; i++) {
+			for (int i = 1; i<2 ; i++) {
 				IRUser user = util.getWithID(i);
 				String fullUser = user.getFirstname()+ "." +user.getLastname();
 				if (fullUser == username) {
