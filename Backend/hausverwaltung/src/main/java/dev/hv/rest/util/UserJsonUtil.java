@@ -82,4 +82,13 @@ public class UserJsonUtil implements IUsers {
 		dao.update(dbUser);
 	}
 
+	public IRUser getWithUsername(String username) {
+		Handle handle = connection.open();
+		final IUserDAO dao = handle.attach(IUserDAO.class);
+		DUser dbUser = dao.findByUsername(username);
+		handle.close();
+		if (dbUser == null) return null;
+		return new RUser(dbUser);
+	}
+
 }

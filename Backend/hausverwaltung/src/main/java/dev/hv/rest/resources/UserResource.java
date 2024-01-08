@@ -6,6 +6,7 @@ import dev.hv.rest.util.UserJsonUtil;
 
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.s;
 import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
 
 import jakarta.ws.rs.Consumes;
@@ -110,22 +111,14 @@ public class UserResource {
 	) {
 		UserJsonUtil util = new UserJsonUtil();
 		if (username != null) {
-			for (int i = 1; i<2 ; i++) {
-				IRUser user = util.getWithID(i);
-				String fullUser = user.getFirstname()+ "." +user.getLastname();
-				if (fullUser == username) {
-					if (password == user.getPassword()) {
-						return Response.status(Response.Status.OK).entity(fullUser).build();
-					} else {
-						return Response.status(Response.Status.UNAUTHORIZED).entity(false).build();
-					}
-				} else {
-					return Response.status(Response.Status.NO_CONTENT).entity("There is no user with the username " + fullUser).build();
-				}
+			IRUser user = util.getWithUsername(username);
+			if (user != null) {
+				return Response.status(Response.Status.OK).entity(user).build();
+			} else {
+				return Response.status(Response.Status.UNAUTHORIZED).build();
 			}
 		} else {
 			return Response.status(Response.Status.NO_CONTENT).entity("There are no users in username field").build();
 		}
-		return Response.status(Response.Status.NO_CONTENT).entity("There are no users in the DB").build();
 	}
 }

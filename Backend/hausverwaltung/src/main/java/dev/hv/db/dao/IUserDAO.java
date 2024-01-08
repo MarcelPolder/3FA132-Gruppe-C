@@ -35,6 +35,14 @@ public interface IUserDAO extends IDAO<DUser> {
 	@RegisterBeanMapper(DUser.class)
 	DUser findById(@Bind("uid") int id);
 
+	@SqlQuery("""
+			SELECT * FROM user
+			WHERE firstname||'.'||lastname= :username
+			LIMIT 1
+			""")
+	@RegisterBeanMapper(DUser.class)
+	DUser findByUsername(@Bind("username") String username);
+
 	@Override
 	@SqlQuery("""
 			SELECT * FROM user
