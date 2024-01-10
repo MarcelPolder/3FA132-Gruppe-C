@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import dev.hv.rest.model.IRReading;
 import dev.hv.rest.model.RCustomer;
 import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Data
+@Generated
 public class DReading implements IDReading {
 
 	// Region Private Fields

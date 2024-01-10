@@ -1,4 +1,5 @@
 package dev.hv.rest;
+import java.lang.annotation.*;
 
 import dev.hv.rest.model.IRUser;
 import dev.hv.rest.model.RUser;
@@ -8,7 +9,9 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.Generated;
 
+@Generated
 public class RestClient {
 
 	WebTarget target;

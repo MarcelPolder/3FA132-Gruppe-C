@@ -19,6 +19,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.Generated;
 
 @Path("users")
 public class UserResource {
@@ -105,6 +106,7 @@ public class UserResource {
 	@Path("authenticate")
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Generated
 	public Response authenticateUser(
 		@FormParam("username") String username,
 		@FormParam("password") String password

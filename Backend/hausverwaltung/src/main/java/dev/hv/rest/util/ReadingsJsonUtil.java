@@ -14,6 +14,7 @@ import dev.hv.db.init.IDb;
 import dev.hv.db.model.DReading;
 import dev.hv.rest.model.IRReading;
 import dev.hv.rest.model.RReading;
+import lombok.Generated;
 
 
 public class ReadingsJsonUtil implements IReadings {
@@ -91,6 +92,7 @@ public class ReadingsJsonUtil implements IReadings {
 	}
 
 	@Override
+	@Generated
 	public List<IRReading> getAllfromCustomerID(Integer id) {
 		Handle handle = connection.open();
 

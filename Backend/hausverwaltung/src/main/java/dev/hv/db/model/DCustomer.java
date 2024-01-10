@@ -5,6 +5,7 @@ import java.beans.ConstructorProperties;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 import dev.hv.rest.model.IRCustomer;
+import jakarta.annotation.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -10,6 +10,9 @@ import java.util.Properties;
 
 import org.jdbi.v3.core.Handle;
 
+import lombok.Generated;
+
+@Generated
 public class IDb implements IDbConnect {
 	private Jdbi jdbiInstance;
 	private static IDb instance;

@@ -24,6 +24,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.Generated;
 
 @Path("reading")
 public class ReadingResource {
@@ -90,6 +91,7 @@ public class ReadingResource {
 	@Path("update/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Generated
 	public Response updateUser(@PathParam("id") int id, RReading reading) {
 		ReadingsJsonUtil util = new ReadingsJsonUtil();
 		CustomerJsonUtil cus_util = new CustomerJsonUtil();
