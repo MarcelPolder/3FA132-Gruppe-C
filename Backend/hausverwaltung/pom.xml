@@ -33,6 +33,16 @@
 			</plugins>
         </pluginManagement>
         <plugins>
+			<plugin>
+			<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+						<mainClass>dev.hv.rest.Server</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
