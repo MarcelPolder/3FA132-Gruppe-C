@@ -1,5 +1,5 @@
 // Styles
-import SignOutButton from '@/components/SignOutButton';
+import { Navigation } from '@/components/Navigation';
 import classes from '@/styles/global/classes.module.scss';
 import '@/styles/layout/pages.scss';
 
@@ -8,23 +8,7 @@ export default function pagesLayout({children}: {children: React.ReactNode}) {
 		<>
 			<header>
 				<div className={classes.inner}>
-					<nav>
-						<ul>
-							<li>
-								<a href="/">
-									<h1>HV</h1>
-								</a>
-							</li>
-							<li>
-								<a href="/kunden">Kunden</a>
-							</li>
-						</ul>
-						<ul>
-							<li>
-								<SignOutButton/>
-							</li>
-						</ul>
-					</nav>
+					<Navigation />
 				</div>
 			</header>
 			<main>

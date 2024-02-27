@@ -1,0 +1,14 @@
+.message {
+	display: block;
+	padding: 8px 12px;
+	border-radius: 8px;
+
+	&.error {
+		background-color: var(--md-sys-color-error-container);
+		color: var(--md-sys-color-on-error-container);
+	}
+
+	.icon {
+		margin-right: 1rem;
+	}
+}

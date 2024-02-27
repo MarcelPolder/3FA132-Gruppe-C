@@ -1,5 +1,7 @@
 'use client';
 
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "next-auth/react";
 
 export default function SignOutButton() {
@@ -8,7 +10,7 @@ export default function SignOutButton() {
 			event.preventDefault();
 			signOut();
 		}}>
-			Abmelden
+			<span><FontAwesomeIcon icon={faRightFromBracket} width={24} height={24}/></span>Abmelden
 		</a>
 	);
 }
