@@ -18,7 +18,7 @@ export default function pagesLayout({children}: {children: React.ReactNode}) {
 			</main>
 			<footer>
 				<div className={classes.inner}>
-					<p>Copyright © 2023</p>
+					<p>Copyright © 2024</p>
 					<div id='authors'>
 						<span>M. Kirchermeier,</span>
 						<span>M. Krug,</span>

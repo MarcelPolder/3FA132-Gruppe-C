@@ -53,8 +53,8 @@ public interface IUserDAO extends IDAO<DUser> {
 	@Override
 	@SqlUpdate("""
 			INSERT INTO user
-			(id, firstname, lastname, password, token) 
-			Values(:user.id, :user.firstname, :user.lastname, :user.password, :user.token)
+			(firstname, lastname, password, token) 
+			Values(:user.firstname, :user.lastname, :user.password, :user.token)
 			""")
 	int insert(@BindBean("user") DUser o);
 
