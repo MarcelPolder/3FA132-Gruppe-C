@@ -17,7 +17,7 @@ async function handler(
 			return NextResponse.json({ status: 200, msg: 'Der Benutzer wurde erfolgreich erstellt.'});
 		}
 	}
-	return NextResponse.error();
+	return NextResponse.json({	status: 500, msg:'Kein erfolg'});
 }
 
 export { handler as GET, handler as POST };
