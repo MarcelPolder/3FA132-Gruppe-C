@@ -1,6 +1,7 @@
 .message {
 	display: block;
 	padding: 8px 12px;
+	margin: 8px 0px;
 	border-radius: 8px;
 
 	&.error {
@@ -8,7 +9,24 @@
 		color: var(--md-sys-color-on-error-container);
 	}
 
+	&.info {
+		background-color: var(--md-sys-color-primary-container);
+		color: var(--md-sys-color-on-primary-container);
+	}
+
 	.icon {
 		margin-right: 1rem;
+	}
+}
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		display: none;
 	}
 }
