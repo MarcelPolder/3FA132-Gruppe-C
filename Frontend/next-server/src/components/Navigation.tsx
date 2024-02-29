@@ -33,17 +33,17 @@ export function Navigation() {
 						</a>
 					</li>
 					<li className={styles.navigationItem}>
-						<a href="/kunden">
+						<a href="/customers">
 							Kunden
 						</a>
 					</li>
 					<li className={styles.navigationItem}>
-						<a href="/benutzer">
+						<a href="/users">
 							Benutzer
 						</a>
 					</li>
 					<li className={styles.navigationItem}>
-						<a href="/zaehlerstaende">
+						<a href="/readings">
 							Zählerstände
 						</a>
 					</li>

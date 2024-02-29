@@ -1,0 +1,158 @@
+/* 
+ * Classes on parent: .grid, .grid-center, .grid-padding
+ * Classes on children:
+ *    .col-{1-12}[-{tp,tl,d}]
+ *    .row-{1-12}[-{tp,tl,d}]
+ *    .start-col-{1-12}[-{tp,tl,d}]
+ *    .end-col-{1-12}[-{tp,tl,d}]
+ *    .start-row-{1-12}[-{tp,tl,d}]
+ *    .end-row-{1-12}[-{tp,tl,d}]
+ 
+ * all class numbers should add up to the $gridColumns number on every device-width
+*/
+
+$gridColumns: 12;
+// parent configuration
+.grid {
+	display: grid;
+	gap: calc(var(--font-size) * 1.2);
+	grid-template-columns: repeat($gridColumns, 1fr);
+	grid-auto-columns: minmax(min-content, 1fr);
+	// grid-auto-rows: minmax(min-content, 1fr);
+	word-break: break-word;
+}
+// parent options
+.grid.grid-center > * {
+	align-self: center;
+}
+.grid.grid-padding > * {
+	padding: calc(var(--font-size) * 1.2);
+}
+.grid.grid-no-gap {
+	gap: 0;
+}
+// child reset: when no class on parent or child is set, children are full width
+.grid:not([class*="col-"]) > *:not([class*="col-"]) {
+	grid-column-start: auto;
+	grid-column-end: span $gridColumns;
+}
+$gap: 4;
+@while $gap >= 64 {
+	.gap#{$gap} {
+		gap: #{$gap}px;
+	}
+	
+	$gap: $gap + 4;
+}
+
+// parent and child columns and rows setup
+@for $index from 1 through $gridColumns {
+	.grid.col-#{$index}{
+		grid-template-columns: repeat(#{$index}, 1fr);
+	}
+	.grid:not([class*="col-"]) > .col-#{$index}{
+		grid-column-start: auto;
+		grid-column-end: span #{$index};
+	}
+	.grid > .row-#{$index}{
+		grid-row-start: auto;
+		grid-row-end: span #{$index};
+	}
+	.grid > .start-col-#{$index}{
+		grid-column-start: #{$index} !important;
+	}
+	.grid > .end-col-#{$index}{
+		grid-column-end: #{$index} !important;
+	}
+	.grid > .start-row-#{$index}{
+		grid-row-start: #{$index} !important;
+	}
+	.grid > .end-row-#{$index}{
+		grid-row-end: #{$index} !important
+	}
+}
+// parent and child columns and rows setup for tablet in portrait mode
+@media screen and (min-width: 600px) {
+	@for $index from 1 through $gridColumns {
+		.grid.col-#{$index}-tp {
+			grid-template-columns: repeat(#{$index}, 1fr);
+		}
+		.grid:not([class*="col-"]) > .col-#{$index}-tp {
+			grid-column-start: auto;
+			grid-column-end: span #{$index};
+		}
+		.grid > .row-#{$index}-tp {
+			grid-row-start: auto;
+			grid-row-end: span #{$index};
+		}
+		.grid > .start-col-#{$index}-tp {
+			grid-column-start: #{$index} !important;
+		}
+		.grid > .end-col-#{$index}-tp {
+			grid-column-end: #{$index} !important;
+		}
+		.grid > .start-row-#{$index}-tp {
+			grid-row-start: #{$index} !important;
+		}
+		.grid > .end-row-#{$index}-tp {
+			grid-row-end: #{$index} !important;
+		}
+	}
+}
+// parent and child columns and rows setup for tablet in landscape mode
+@media screen and (min-width: 900px) {
+	@for $index from 1 through $gridColumns {
+		.grid.col-#{$index}-tl {
+			grid-template-columns: repeat(#{$index}, 1fr);
+		}
+		.grid:not([class*="col-"]) > .col-#{$index}-tl {
+			grid-column-start: auto;
+			grid-column-end: span #{$index};
+		}
+		.grid > .row-#{$index}-tl {
+			grid-row-start: auto;
+			grid-row-end: span #{$index};
+		}
+		.grid > .start-col-#{$index}-tl {
+			grid-column-start: #{$index} !important;
+		}
+		.grid > .end-col-#{$index}-tl {
+			grid-column-end: #{$index} !important;
+		}
+		.grid > .start-row-#{$index}-tl {
+			grid-row-start: #{$index} !important;
+		}
+		.grid > .end-row-#{$index}-tl {
+			grid-row-end: #{$index} !important;
+		}
+	}
+}
+// parent and child columns and rows setup for desktop
+@media screen and (min-width: 1200px) {
+	@for $index from 1 through $gridColumns {
+
+		.grid.col-#{$index}-d {
+			grid-template-columns: repeat(#{$index}, 1fr);
+		}
+		.grid:not([class*="col-"]) > .col-#{$index}-d {
+			grid-column-start: auto;
+			grid-column-end: span #{$index};
+		}
+		.grid > .row-#{$index}-d {
+			grid-row-start: auto;
+			grid-row-end: span #{$index};
+		}
+		.grid > .start-col-#{$index}-d {
+			grid-column-start: #{$index} !important;
+		}
+		.grid > .end-col-#{$index}-d {
+			grid-column-end: #{$index} !important;
+		}
+		.grid > .start-row-#{$index}-d {
+			grid-row-start: #{$index} !important;
+		}
+		.grid > .end-row-#{$index}-d {
+			grid-row-end: #{$index} !important;
+		}
+	}
+}
