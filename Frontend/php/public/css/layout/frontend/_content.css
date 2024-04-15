@@ -1,0 +1,34 @@
+header {
+  padding: var(--font-size) 0;
+}
+header .inner {
+  position: relative;
+}
+header .inner nav ul {
+  list-style-type: none;
+}
+section {
+  padding: calc(var(--font-size) * 2) 0;
+}
+footer {
+  background-color: var(--color-primary300);
+  color: var(--color-primary900);
+  font-size: calc(var(--font-size) * 0.8);
+  line-height: 1;
+}
+.darkmode footer {
+  background-color: var(--color-primary800);
+  color: var(--color-primary);
+}
+footer section {
+  padding: var(--font-size) 0;
+}
+footer section a {
+  color: var(--color-primary900);
+}
+.darkmode footer section a {
+  color: var(--color-primary);
+}
+footer section a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,141 @@
+//main:main.less
+body {
+	padding: unset;
+}
+
+header {
+	border-bottom: 1px solid var(--color-primary800);
+	.inner {
+		position: relative;
+		padding-top: 12px;
+		padding-bottom: 12px;
+
+		.nav-header {
+			display: flex;
+			justify-content: space-between;
+    		align-items: center;
+
+			a {
+				display: inline-block;
+				padding: 8px;
+				border: 1px solid var(--color-primary200);
+				border-radius: 50%;
+
+				.darkmode & {
+					border-color: var(--color-primary800);
+				}
+			}
+		}
+
+		nav {
+			position: fixed;
+			top: 67px;
+			left: 0;
+			
+			max-width: 42px;
+			width: 100%;
+			height: calc(100% - 67px);
+			transition: width 0.25s ease;
+
+			&.wide {
+				max-width: 280px;
+			}
+
+			ul {
+				.nav-item {
+					.item-text {
+						display: none;
+					}
+
+					&.item-large {
+						.item-text {
+							display: inline-block;
+						}
+					}
+				}
+			}
+
+			
+
+			.darkmode & {
+				background-color: var(--color-primary800);
+			}
+
+			ul {
+				list-style-type: none;
+				margin: unset;
+				padding: unset;
+
+				li {
+					padding: 4px;
+
+					&.nav-toggle {
+						border: 1px solid var(--color-primary300);
+					}
+
+					&.logout {
+						float: right;
+					}
+
+					a {
+						display: block;
+					}
+				}
+			}
+
+			.nav-toggle {
+				position: absolute;
+				top: var(--font-size);
+				right: -32px;
+				background-color: var(--color-primary100);
+				padding: 4px;
+				border-top-right-radius: 12px;
+				border-bottom-right-radius: 12px;
+
+				.darkmode & {
+					background-color: var(--color-primary800);
+				}
+			}
+		}
+	}
+}
+
+main {
+	padding-left: 42px;
+
+	&.shrunk {
+		padding-left: 280px;
+	}
+}
+
+section {
+	padding: calc(var(--font-size) * 2) 0;
+}
+
+footer {
+	background-color: var(--color-primary300);
+	color: var(--color-primary900);
+	font-size: calc(var(--font-size) * 0.8);
+	line-height: 1;
+
+	.darkmode & {
+		background-color: var(--color-primary800);
+		color: var(--color-primary);
+	}
+
+	section {
+		padding: var(--font-size) 0;
+
+		a {
+			color: var(--color-primary900);
+
+			.darkmode & {
+				color: var(--color-primary);
+			}
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}

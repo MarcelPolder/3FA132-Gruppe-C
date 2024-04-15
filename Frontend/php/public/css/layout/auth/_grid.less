@@ -1,0 +1,148 @@
+/* 
+ * Classes on parent: .grid, .grid-center, .grid-padding
+ * Classes on children:
+ *    .col-{1-12}[-{tp,tl,d}]
+ *    .row-{1-12}[-{tp,tl,d}]
+ *    .start-col-{1-12}[-{tp,tl,d}]
+ *    .end-col-{1-12}[-{tp,tl,d}]
+ *    .start-row-{1-12}[-{tp,tl,d}]
+ *    .end-row-{1-12}[-{tp,tl,d}]
+ 
+ * all class numbers should add up to the @grid-columns number on every device-width
+*/
+
+@grid-columns: 12;
+// parent configuration
+.grid {
+	display: grid;
+	gap: calc(var(--font-size) * 1.2);
+	grid-template-columns: repeat(@grid-columns, minmax(10px, 1fr));
+	grid-auto-columns: minmax(min-content, minmax(10px, 1fr));
+	// grid-auto-rows: minmax(min-content, minmax(10px, 1fr));
+	word-break: break-word;
+}
+// parent options
+.grid.grid-center > * {
+	align-self: center;
+}
+.grid.grid-padding > * {
+	padding: calc(var(--font-size) * 1.2);
+}
+.grid.grid-no-gap {
+	gap: 0;
+}
+// child reset: when no class on parent or child is set, children are full width
+.grid:not([class*="col-"]) > *:not([class*="col-"]) {
+	grid-column-start: auto;
+	grid-column-end: span @grid-columns;
+}
+// parent and child columns and rows setup
+each(range(1, @grid-columns, 1), {
+	.grid.col-@{index} {
+		grid-template-columns: repeat(@value, minmax(10px, 1fr));
+	}
+	.grid:not([class*="col-"]) > .col-@{index} {
+		grid-column-start: auto;
+		grid-column-end: span @value;
+	}
+	.grid > .row-@{index} {
+		grid-row-start: auto;
+		grid-row-end: span @value;
+	}
+	.grid > .start-col-@{index} {
+		grid-column-start: @value !important;
+	}
+	.grid > .end-col-@{index} {
+		grid-column-end: @value !important;
+	}
+	.grid > .start-row-@{index} {
+		grid-row-start: @value !important;
+	}
+	.grid > .end-row-@{index} {
+		grid-row-end: @value !important
+	}
+});
+// parent and child columns and rows setup for tablet in portrait mode
+@media @tablet-portrait {
+	each(range(1, @grid-columns, 1), {
+		.grid.col-@{index}-tp {
+			grid-template-columns: repeat(@value, minmax(10px, 1fr));
+		}
+		.grid:not([class*="col-"]) > .col-@{index}-tp {
+			grid-column-start: auto;
+			grid-column-end: span @value;
+		}
+		.grid > .row-@{index}-tp {
+			grid-row-start: auto;
+			grid-row-end: span @value;
+		}
+		.grid > .start-col-@{index}-tp {
+			grid-column-start: @value !important;
+		}
+		.grid > .end-col-@{index}-tp {
+			grid-column-end: @value !important;
+		}
+		.grid > .start-row-@{index}-tp {
+			grid-row-start: @value !important;
+		}
+		.grid > .end-row-@{index}-tp {
+			grid-row-end: @value !important;
+		}
+	});
+}
+// parent and child columns and rows setup for tablet in landscape mode
+@media @tablet-landscape {
+	each(range(1, @grid-columns, 1), {
+		.grid.col-@{index}-tl {
+			grid-template-columns: repeat(@value, minmax(10px, 1fr));
+		}
+		.grid:not([class*="col-"]) > .col-@{index}-tl {
+			grid-column-start: auto;
+			grid-column-end: span @value;
+		}
+		.grid > .row-@{index}-tl {
+			grid-row-start: auto;
+			grid-row-end: span @value;
+		}
+		.grid > .start-col-@{index}-tl {
+			grid-column-start: @value !important;
+		}
+		.grid > .end-col-@{index}-tl {
+			grid-column-end: @value !important;
+		}
+		.grid > .start-row-@{index}-tl {
+			grid-row-start: @value !important;
+		}
+		.grid > .end-row-@{index}-tl {
+			grid-row-end: @value !important;
+		}
+	});
+}
+// parent and child columns and rows setup for desktop
+@media @desktop {
+	each(range(1, @grid-columns, 1), {
+		.grid.col-@{index}-d {
+			grid-template-columns: repeat(@value, minmax(10px, 1fr));
+		}
+		.grid:not([class*="col-"]) > .col-@{index}-d {
+			grid-column-start: auto;
+			grid-column-end: span @value;
+		}
+		.grid > .row-@{index}-d {
+			grid-row-start: auto;
+			grid-row-end: span @value;
+		}
+		.grid > .start-col-@{index}-d {
+			grid-column-start: @value !important;
+		}
+		.grid > .end-col-@{index}-d {
+			grid-column-end: @value !important;
+		}
+		.grid > .start-row-@{index}-d {
+			grid-row-start: @value !important;
+		}
+		.grid > .end-row-@{index}-d {
+			grid-row-end: @value !important;
+		}
+	});
+}

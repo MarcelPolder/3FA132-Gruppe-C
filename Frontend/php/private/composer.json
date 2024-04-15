@@ -1,0 +1,25 @@
+{
+	"name": "rm/webapp",
+	"description": "Application",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Michael Hochstetter",
+			"role": "Developer"
+		}
+	],
+	"config": {
+		"optimize-autoloader": true
+	},
+	"require": {
+		"filp/whoops": "^2.7",
+		"phpmailer/phpmailer": "^6.1",
+		"illuminate/collections": "^9.4",
+		"firebase/php-jwt": "^6.10"
+	},
+	"autoload": {
+		"psr-4": {
+			"Webapp\\": "app/"
+		}
+	}
+}

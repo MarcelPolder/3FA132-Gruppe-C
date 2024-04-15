@@ -1,0 +1,8 @@
+{
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "flatpickr": "^4.6.13",
+    "jquery": "^3.7.1",
+    "material-symbols": "^0.14.1"
+  }
+}

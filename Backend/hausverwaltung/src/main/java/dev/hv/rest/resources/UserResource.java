@@ -111,6 +111,8 @@ public class UserResource {
 		@FormParam("username") String username,
 		@FormParam("password") String password
 	) {
+		System.out.println(username);
+		System.out.println(password);
 		UserJsonUtil util = new UserJsonUtil();
 		if (username != null) {
 			IRUser user = util.getWithUsername(username);

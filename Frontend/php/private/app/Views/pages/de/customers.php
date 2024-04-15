@@ -1,0 +1,15 @@
+<article>
+	<section>
+		<table>
+			<thead>
+				<tr>
+					<th>Vorname</th>
+					<th>Nachname</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?=$this->data['customersHTML']?>
+			</tbody>
+		</table>
+	</section>
+</article>
