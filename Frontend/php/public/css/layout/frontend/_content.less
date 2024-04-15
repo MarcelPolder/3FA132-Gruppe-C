@@ -3,6 +3,20 @@ body {
 	padding: unset;
 }
 
+#notify {
+	display: none;
+	position: fixed;
+	top: -100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: calc(var(--font-size) * 0.4) calc(var(--font-size) * 1.2);
+	border-radius: 4px;
+	background-color: var(--color-accentHover);
+	color: #fff;
+	.shadow2;
+	z-index: 99999;
+}
+
 header {
 	border-bottom: 1px solid var(--color-primary800);
 	.inner {
@@ -10,16 +24,22 @@ header {
 		padding-top: 12px;
 		padding-bottom: 12px;
 
+		.nav-site-title {
+			font-size: 24px;
+		}
+
 		.nav-header {
 			display: flex;
 			justify-content: space-between;
     		align-items: center;
 
 			a {
-				display: inline-block;
+				display: block;
 				padding: 8px;
 				border: 1px solid var(--color-primary200);
 				border-radius: 50%;
+				line-height: 0;
+				font-size: 0;
 
 				.darkmode & {
 					border-color: var(--color-primary800);
@@ -29,12 +49,12 @@ header {
 
 		nav {
 			position: fixed;
-			top: 67px;
+			top: 64px;
 			left: 0;
 			
 			max-width: 42px;
 			width: 100%;
-			height: calc(100% - 67px);
+			height: calc(100% - 64px);
 			transition: width 0.25s ease;
 
 			&.wide {
@@ -56,9 +76,9 @@ header {
 			}
 
 			
-
+			background-color: var(--color-primary200);
 			.darkmode & {
-				background-color: var(--color-primary800);
+				background-color: var(--color-primary700);
 			}
 
 			ul {
@@ -103,16 +123,42 @@ header {
 main {
 	padding-left: 42px;
 
-	&.shrunk {
-		padding-left: 280px;
+	@media (@tablet-landscape) {
+		&.shrunk {
+			padding-left: 280px;
+		}
+	}
+
+
+	.actions {
+		padding: 4px 8px;
+		border-bottom: 1px solid var(--color-primary200);
+
+		.darkmode & {
+			border-bottom-color: var(--color-primary700);
+		}
+
+		ul {
+			list-style-type: none;
+			margin: unset;
+			padding: unset;
+
+			li {
+				margin: unset;
+			}
+		}
 	}
 }
 
 section {
-	padding: calc(var(--font-size) * 2) 0;
+	padding: calc(var(--font-size) * 2) var(--font-size);
 }
 
 footer {
+	position: fixed;
+	bottom: 0;
+	left: 42px;
+	width: calc(100% - 42px);
 	background-color: var(--color-primary300);
 	color: var(--color-primary900);
 	font-size: calc(var(--font-size) * 0.8);

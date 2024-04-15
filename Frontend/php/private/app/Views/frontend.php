@@ -129,6 +129,7 @@ namespace Webapp\Core;
 <body<?=(isset($this->data['darkmodeActive']) && $this->data['darkmodeActive'] ? " class='darkmode'" : "")?>>
 
 	<div id="progressBar"></div>
+	<div id="notify"></div>
 	
 	<header>
 		<div class="inner">

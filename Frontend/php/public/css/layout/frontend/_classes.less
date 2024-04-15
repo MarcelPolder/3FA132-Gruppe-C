@@ -1,3 +1,4 @@
+//main:main.less
 .inner {
 	margin: auto;
 	padding-left: calc(var(--font-size) * 1.2);
@@ -519,5 +520,19 @@ button .material-symbols-outlined, button .material-symbols-rounded, button .mat
 @keyframes box-shadow-blink {
 	50% {
 		box-shadow: 0 0 12px #a00;
+	}
+}
+
+.user {
+	padding: 8px;
+	border: 1px solid var(--color-primary100);
+	border-radius: 8px;
+
+	.darkmode & {
+		border-color: var(--color-primary800);
+	}
+
+	.user-info-edit, .user-password-edit {
+		display: none;
 	}
 }

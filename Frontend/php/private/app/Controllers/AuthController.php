@@ -22,6 +22,10 @@ class AuthController extends Controller {
 		}
 		$form = Form::getInstance();
 
+		if (!HVApi::isAvailable()) {
+			$form->error('Das Backend ist nicht erreichbar!');
+		}
+
 		if ($form->is('login')) {
 			if (HVApi::authenticateUser()) {
 				Router::redirect("/");

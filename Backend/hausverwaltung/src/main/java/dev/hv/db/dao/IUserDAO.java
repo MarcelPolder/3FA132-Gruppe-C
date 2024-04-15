@@ -72,8 +72,10 @@ public interface IUserDAO extends IDAO<DUser> {
 	@SqlUpdate("""
 			UPDATE user
 			SET 
-				firstname=:user.firstname,
-				lastname=:user.lastname
+				firstname=coalesce(:user.firstname, firstname),
+				lastname=coalesce(:user.lastname, lastname),
+				password=coalesce(:user.password, password),
+				token=coalesce(:user.token, token)
 			WHERE id = :user.id
 			""")
 	void update(@BindBean("user") DUser o);

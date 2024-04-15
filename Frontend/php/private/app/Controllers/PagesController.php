@@ -2,6 +2,8 @@
 namespace Webapp\Controllers;
 
 use Webapp\Core\Config;
+use Webapp\Core\Form;
+use Webapp\Core\Request;
 use Webapp\Core\Router;
 use Webapp\Lib\HVApi;
 
@@ -24,6 +26,11 @@ class PagesController extends \Webapp\Core\Controller {
 		$this->data['customersHTML'] = HVApi::getCustomers(true);
 	}
 	public function users() {
+		$form = Form::getInstance();
+		$post = Request::getInstance()->getPost();
+		if ($form->is('create-user')) {
+			$response = HVApi::createUser($post['firstname'], $post['lastname'], $post['password']);
+		}
 		$this->data['usersHTML'] = HVApi::getUsers(true);
 	}
 
