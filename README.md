@@ -1,43 +1,39 @@
-# 3FA132-Gruppe-C
-BSInfo Projekt Repo
+## 1FA132 - Gruppe C - Hausverwaltung
 
-## Backend starten
+Dieses Projekt, entwickelt von Schülern der Berufsschule für Informationstechnik in München, ist ein Abschlussprojekt, das aus zwei Microservices besteht: einer PHP-Webseite und einem Java-REST-Server. Die Webseite bietet eine intuitive Benutzeroberfläche für die Verwaltung von Hausressourcen, während der REST-Server eine robuste Backend-Infrastruktur bereitstellt. Das Projekt demonstriert die Fähigkeiten der Schüler im Bereich der Webentwicklung und verteilten Systeme.
 
-Um das Backend der Hausverwaltung zu starten, folge bitte den untenstehenden Schritten:
+### Voraussetzungen
 
-1. Stelle sicher, dass du Maven auf deinem System installiert hast. Falls nicht, kannst du es von der offiziellen [Maven-Website](https://maven.apache.org/download.cgi) herunterladen und installieren.
+- Docker muss auf dem System installiert sein. [Docker Installation Guide](https://docs.docker.com/get-docker/)
+- Git sollte ebenfalls installiert sein, um das Repository zu klonen. [Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-2. Navigiere zu `Backend/hausverwaltung`
+### Anleitung
 
-3. Öffne ein Terminal oder eine Befehlszeile und führe den folgenden Befehl aus, um das Backend zu bauen und zu starten:
-
-```bash
-mvn clean install
-java -jar target/hausverwaltung-backend.jar
-```
-Dieser Befehl kompiliert den Code, erstellt das JAR-Archiv und startet dann den Server.
-
-Nach erfolgreicher Ausführung sollten Meldungen erscheinen, die darauf hinweisen, dass der Server gestartet wurde. Standardmäßig wird der Server auf http://localhost:8080 lauschen.
-
-## Frontend starten
-
-Um den Next.js-Server des Frontends zu starten, befolge bitte die folgenden Schritte:
-
-1. Stelle sicher, dass Node.js auf deinem System installiert ist.
-
-2. Navigiere nach `Frontend/next-server`
-
-3. Öffne ein Terminal oder eine Befehlszeile und führe die folgenden Befehle aus:
+1. **Repository klonen**: Klonen Sie dieses Repository auf Ihre lokale Maschine.
 
 ```bash
-yarn install
-yarn next dev
+	git clone https://github.com/MarcelPolder/3FA132-Gruppe-C.git
 ```
 
-Der Entwicklungs-Server startet und das Frontend wird auf http://localhost:3000 verfügbar sein.
+2. **Docker Compose ausführen**: Wechseln Sie in das Verzeichnis des geklonten Repositorys und führen Sie Docker Compose aus.
+```bash
+	cd 3FA132-Gruppe-C
+	docker-compose up
+```
+3. **Warten Sie auf den Abschluss**: Docker Compose wird die Container für die PHP-Webseite und den Java-REST-Server erstellen und starten. Bitte warten Sie, bis der Vorgang abgeschlossen ist.
 
-Öffne deinen Webbrowser und besuche http://localhost:3000, um auf das Frontend der Hausverwaltung zuzugreifen.
+4. **Zugriff auf die Anwendung**: Sobald die Container gestartet sind, können Sie auf die Anwendung über die folgenden URLs zugreifen:
 
-### Zugangsdaten
-Die Zugangsdaten für die Hausverwaltung lauten wie folgt:
-`marcel.polder`:`1234`
+   - Webseiten-Frontend (PHP): http://localhost:3000
+   - REST-Server (Java): http://localhost:8080
+
+### Anmerkungen
+
+- Die PHP-Webseite und der Java-REST-Server werden in separaten Containern ausgeführt und über Docker Compose miteinander verbunden.
+- Änderungen am Quellcode können direkt im geklonten Repository vorgenommen werden. Nachdem Sie Änderungen vorgenommen haben, können Sie einfach `docker-compose up` erneut ausführen, um die Anwendung mit den neuen Änderungen neu zu starten.
+
+### Mitwirkende
+- Marcel Polder
+- Moritz Kirchermeier
+- Moritz Krug
+- Oliver Fuchs
