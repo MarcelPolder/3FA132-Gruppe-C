@@ -11,6 +11,7 @@ public class HelloWorldRessource {
 	@Path("hello")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getHelloWorld() {
+		System.out.println("Requested '/world/hello'");
 		return "Hello World!";
 	}
 }

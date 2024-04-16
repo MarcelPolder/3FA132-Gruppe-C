@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build:
+      context: ./Frontend/php
+    ports:
+      - "80:80"
+  backend:
+    build:
+      context: ./Backend/hausverwaltung
+    ports:
+      - "8080:8080"
