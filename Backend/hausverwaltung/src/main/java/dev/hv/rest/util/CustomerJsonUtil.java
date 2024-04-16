@@ -66,7 +66,7 @@ public class CustomerJsonUtil implements ICustomers {
 		Handle handle = connection.open();
 
 		final ICustomerDAO dao = handle.attach(ICustomerDAO.class);
-		DCustomer dbUser = new DCustomer(customer);
+		DCustomer dbUser = new DCustomer(customer.getFirstname(), customer.getLastname());
 
 		return dao.insert(dbUser);
 	}

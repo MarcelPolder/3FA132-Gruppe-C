@@ -3,14 +3,12 @@ namespace Webapp\Lang;
 
 return [
 	// site
-	'frontend.siteTitle' => 'WebApp',
+	'auth.siteTitle' => 'Hausverwaltung',
+	'auth.siteTitlePrefix' => '•',
+	'frontend.siteTitle' => 'Hausverwaltung',
 	'frontend.siteTitlePrefix' => '•',
 	'frontend.siteDescription' => '',
 	'frontend.siteKeywords' => '',
-	'cms.siteTitle' => 'WebApp CMS',
-	'cms.siteTitlePrefix' => '•',
-	'cms.siteDescription' => '',
-	'cms.siteKeywords' => '',
 	// general
 	'date.format.short' => 'd.m.Y',
 	'date.format.long' => 'd.m.Y H:i',
@@ -56,4 +54,7 @@ return [
 	'frontend.datenschutz.navigation' => 'Datenschutz',
 	'frontend.impressum.title' => 'Impressum',
 	'frontend.impressum.navigation' => 'Impressum',
+
+	// auth
+	'auth.auth.login.title' => "Anmelden",
 ];

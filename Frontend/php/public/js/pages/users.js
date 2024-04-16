@@ -31,7 +31,6 @@ function updateUser(response) {
 function updatePassword(response) {
 	notify(response.msg);
 	if (response.status == 200) {
-		el.find('.user-password-edit').slideUp('fast');
-		const el = $('.user[data-id="'+response.data.id+'"]');
+		$(document).find('.user[data-id="'+response.data.id+'"] .user-password-edit').slideUp('fast');
 	}
 }

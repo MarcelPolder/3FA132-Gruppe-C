@@ -216,76 +216,6 @@ jQuery(($) => {
 		if(columnSortDesc) column.addClass('sorted-desc');
 	});
 
-	// Flatpickr
-	if(typeof flatpickr!=='undefined') {
-		flatpickr.localize(flatpickr.l10ns.de);
-		flatpickr('.flpckr', {
-			dateFormat: 'd.m.Y',
-			weekNumbers: true,
-			onReady: (dateObj, dateStr, instance) => {
-				var $cal = $(instance.calendarContainer);
-				if($cal.find('.flpckr-clear').length < 1) {
-					$cal.append('<div class="flpckr-clear"></div>');
-					$cal.find('.flpckr-clear').on('click', () => {
-						instance.clear();
-						instance.close();
-					});
-				}
-			},
-		});
-		flatpickr('.flpckr-time', {
-			dateFormat: 'd.m.Y H:i',
-			enableTime: true,
-			time_24hr: true,
-			weekNumbers: true,
-			onReady: (dateObj, dateStr, instance) => {
-				var $cal = $(instance.calendarContainer);
-				if($cal.find('.flpckr-clear').length < 1) {
-					$cal.append('<div class="flpckr-clear"></div>');
-					$cal.find('.flpckr-clear').on('click', () => {
-						instance.clear();
-						instance.close();
-					});
-				}
-			},
-		});
-		flatpickr('.flpckr-only-time', {
-			dateFormat: 'H:i',
-			noCalendar: true,
-			enableTime: true,
-			time_24hr: true,
-			onReady: (dateObj, dateStr, instance) => {
-				var $cal = $(instance.calendarContainer);
-				if($cal.find('.flpckr-clear').length < 1) {
-					$cal.append('<div class="flpckr-clear"></div>');
-					$cal.find('.flpckr-clear').on('click', () => {
-						instance.clear();
-						instance.close();
-					});
-				}
-			},
-		});
-		flatpickr('.flpckr-range', {
-			mode: 'range',
-			dateFormat: 'd.m.Y',
-			weekNumbers: true,
-			onReady: (dateObj, dateStr, instance) => {
-				var $cal = $(instance.calendarContainer);
-				if($cal.find('.flpckr-clear').length < 1) {
-					$cal.append('<div class="flpckr-clear"></div>');
-					$cal.find('.flpckr-clear').on('click', () => {
-						instance.clear();
-						instance.close();
-					});
-				}
-			},
-		});
-		// var fp = $('#flpckr-startseite')[0]._flatpickr;
-		// fp.config.onChange = [(dateObj, dateStr) => {
-		// 	if(dateObj.length==2) { // when finished changing } else if(dateStr.length==0) { }
-		// }];
-	}
-
 	// form field error tooltips
 	$(document).on('click', '.fieldErrorTooltip', function(e) {
 		e.preventDefault();
@@ -299,9 +229,6 @@ jQuery(($) => {
 		$('main').toggleClass('shrunk');
 	})
 });
-
-// mhLightbox
-$.mhLightbox({ padding: '0px' });
 
 // Callbacks
 // function logout(response) {

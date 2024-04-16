@@ -47,8 +47,8 @@ public interface ICustomerDAO extends IDAO<DCustomer> {
 	@Override
 	@SqlUpdate("""
 			INSERT INTO customer
-			(id, vorname, nachname) 
-			Values(:cus.id, :cus.firstname, :cus.lastname)
+			(vorname, nachname) 
+			Values(:cus.firstname, :cus.lastname)
 			""")
 	int insert(@BindBean("cus") DCustomer o);
 

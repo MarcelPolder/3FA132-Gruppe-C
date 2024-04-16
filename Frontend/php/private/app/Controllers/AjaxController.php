@@ -20,7 +20,7 @@ class AjaxController extends \Webapp\Core\Controller {
 		header('Accept-Ranges: bytes');
 	}
 
-	public function user() {
+	public function users() {
 		$params = Router::getParams();
 		$response = [];
 		if (!empty($params)) {
@@ -63,6 +63,74 @@ class AjaxController extends \Webapp\Core\Controller {
 			echo $response;
 			exit;
 		}
+	}
+
+	public function customers() {
+		$params = Router::getParams();
+		$post = Request::getInstance()->getPost();
+		$response = [];
+
+		if (!empty($params)) {
+			switch ($params[0]) {
+				case 'update':
+					if (!empty($post['id']) && !empty($post['firstname']) && !empty($post['lastname'])) {
+						$success = HVApi::updateCustomer($post['id'], $post
+						['firstname'], $post['lastname']);
+						if (!empty($success)) {
+							$response = Error::json(
+								msg: 'Der Kunde wurde bearbeitet.',
+								type: 'success',
+								status: 200,
+								data: $success,
+								returnEncoded: false,
+							);
+						}
+						break;
+					}
+					break;
+				case 'get':
+					$chunk = empty($post['index']) ? 0 : $post['index'];
+					$customers = HVApi::getCustomers(true, $chunk);
+					if (!empty($customers)) {
+						$response = Error::json(
+							msg: 'Erfolgreich',
+							type: 'success',
+							status: 200,
+							returnEncoded: false,
+							data: ['html' => $customers],
+						);
+					}
+					break;
+				case 'delete':
+					if (!empty($post['id'])) {
+						$response = HVApi::deleteCustomer($post['id']);
+						if (!empty($response)) {
+							$response = Error::json(
+								msg: 'Der Kunde wurde gelöscht.',
+								type: 'success',
+								status: 200,
+								returnEncoded: false,
+								data: [
+									'id' => $post['id'],
+								],
+							);
+						} else {
+							$response = Error::json(
+								msg: 'Der Kunde konnte nicht gelöscht werden.',
+								returnEncoded: false,
+							);
+						}
+					}
+					break;
+				default:
+					throw new Error(__('error.404.text'), 404);
+			}
+		}
+
+		$response = json_encode($response);
+		header('Content-Length: '.mb_strlen($response));
+		echo $response;
+		exit;
 	}
 
 }

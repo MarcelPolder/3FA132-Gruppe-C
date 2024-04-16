@@ -35,59 +35,17 @@ class Controller {
 			order: 'global',
 		);
 		$this->addCss(
-			"/css/flatpickr/flatpickr.css",
-			order: 'global',
-		);
-		$this->addCss(
-			'/css/external/mhCookie.css',
-			order: 'global',
-			when: Config::get('rights.datenschutz.cookies'),
-		);
-		$this->addCss(
 			'/css/layout/'.Router::getLayout().'/main.css',
 			order: 'global',
 		);
 
-		$this->addHeadElement('<style>.flpckr-clear::before {content: "'.__('flatpickr.clear').'";}</style>');
-
-		$this->addJs(
-			'/js/layout/'.Router::getLayout().'/werbebanner-ad.js',
-			id: 'werbebannerAd',
-			order: 'global',
-			when: Config::get('adblockChecker'),
-		);
+	
 		$this->addJs(
 			'/js/jquery.js',
 			id: 'jQueryScript',
 			order: 'global',
 		);
-		$this->addJs(
-			'/js/flatpickr.js',
-			order: 'global',
-		);
-		$this->addJs(
-			'/js/flatpickr/l10n/'.Router::getLanguage().'.js',
-			order: 'global',
-		);
-		$this->addJs(
-			'/js/external/mhLightbox.js',
-			order: 'global',
-		);
-		$this->addJs(
-			'/js/external/mhCookie.js',
-			id: 'mhCookie_script',
-			data: [
-				'seite' => 'datenschutz',
-				'tools' => [
-					(Config::get('rights.datenschutz.google_maps') ? 'googleMaps' : ''),
-					(Config::get('rights.datenschutz.google_analytics') ? 'googleAnalytics' : ''),
-					(Config::get('rights.datenschutz.google_adsense') ? 'googleAdsense' : ''),
-					(Config::get('rights.datenschutz.google_recaptcha') ? 'googleRecaptcha' : ''),
-				]
-			],
-			order: 'global',
-			when: Config::get('rights.datenschutz.cookies'),
-		);
+		
 		$this->addJs(
 			'/js/layout/'.Router::getLayout().'/scripts.js',
 			order: 'global',
@@ -96,11 +54,6 @@ class Controller {
 			'/js/layout/'.Router::getLayout().'/darkmode.js',
 			order: 'global',
 			when: Config::get('darkmodeCheck'),
-		);
-		$this->addJs(
-			'https://www.google.com/recaptcha/api.js',
-			order: 'global',
-			when: Config::get('rights.datenschutz.google_recaptcha'),
 		);
 	}
 

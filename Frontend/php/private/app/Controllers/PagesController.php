@@ -1,7 +1,6 @@
 <?php
 namespace Webapp\Controllers;
 
-use Webapp\Core\Config;
 use Webapp\Core\Form;
 use Webapp\Core\Request;
 use Webapp\Core\Router;
@@ -23,6 +22,16 @@ class PagesController extends \Webapp\Core\Controller {
 	/* Sites */
 	public function startseite() {}
 	public function customers() {
+		$form = Form::getInstance();
+		$post = Request::getInstance()->getPost();
+		if ($form->is('create-customer')) {
+			$response = HVApi::createCustomer($post['firstname'], $post['lastname']);
+			if (!empty($response)) {
+				$form->success('Der Kunde wurde erfolgreich erstellt.');
+			} else {
+				$form->error('Ein Fehler ist aufgetreten.');
+			}
+		}
 		$this->data['customersHTML'] = HVApi::getCustomers(true);
 	}
 	public function users() {

@@ -77,7 +77,6 @@ public class CustomerRessource {
 	public Response createCustomer(RCustomer customer) {
 		try {
 			CustomerJsonUtil util = new CustomerJsonUtil();
-			System.out.println(customer.getId());
 			int created = util.insert(customer);
 			if (created > 0) {
 				return Response.status(Response.Status.CREATED).entity(customer).build();
@@ -91,6 +90,7 @@ public class CustomerRessource {
 			} else
 				throw sqlException;
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 					.entity("There was an error while creating the new user. Details: " + ex.getMessage()).build();
 		}
