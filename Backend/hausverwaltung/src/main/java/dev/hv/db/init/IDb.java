@@ -53,13 +53,13 @@ public class IDb implements IDbConnect {
 	@Override
 	public Jdbi getJdbi() {
 		if (this.jdbiInstance == null) {
-			Properties appProps = new Properties();
-			try {
-				appProps.load(new FileInputStream(getClass().getResource("/app.properties").getPath()));
-				this.jdbiInstance = this.getJdbi("jdbc:sqlite:"+getClass().getResource("/db/database.db").getPath(), "", "");
-			} catch (IOException e) {
-				e.printStackTrace();
+			String path;
+			if (IDb.class.getResource("IDb.class").toString().startsWith("jar")) {
+				path = "/db/database.db";
+			} else {
+				path = getClass().getResource("/db/database.db").getPath();
 			}
+			this.jdbiInstance = this.getJdbi("jdbc:sqlite:"+path, "", "");
 		}
 		return this.jdbiInstance;
 	}

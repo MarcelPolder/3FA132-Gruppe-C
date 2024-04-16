@@ -13,7 +13,7 @@ public class Server {
 	
 	public static void main (String[] args) {
 		final String pack = "dev.hv.rest.resources";
-		String url = "http://localhost:8080/rest";
+		String url = "http://0.0.0.0:8080/rest";
 		final ResourceConfig rc = new ResourceConfig().packages(pack);
 		try {
 			final HttpServer server = JdkHttpServerFactory.createHttpServer(URI.create(url), rc);

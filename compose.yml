@@ -1,9 +1,10 @@
+version: "3.8"
 services:
   frontend:
     build:
       context: ./Frontend/php
     ports:
-      - "80:80"
+      - "3000:80"
   backend:
     build:
       context: ./Backend/hausverwaltung

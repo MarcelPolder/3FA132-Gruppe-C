@@ -39,7 +39,7 @@ COPY ./src src/
 RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     --mount=type=cache,target=/root/.m2 \
     ./mvnw jar:jar -DskipTests && \
-	./mvnw clean compile assembly:single -DskipTests && \
+	./mvnw package -DskipTests && \
     mv target/$(./mvnw help:evaluate -Dexpression=project.artifactId -q -DforceStdout)-$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout).jar target/app.jar
 
 
@@ -72,5 +72,7 @@ USER appuser
 
 # Copy the executable from the "package" stage.
 COPY --from=package build/target/app.jar app.jar
+COPY --from=package build/target/classes/db/database.db /db/database.db
 
+EXPOSE 8080
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
