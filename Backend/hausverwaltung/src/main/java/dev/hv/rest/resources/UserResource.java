@@ -114,7 +114,7 @@ public class UserResource {
 		UserJsonUtil util = new UserJsonUtil();
 		if (username != null) {
 			IRUser user = util.getWithUsername(username);
-			if (user != null) {
+			if (user != null && user.getPassword().equals(password)) {
 				return Response.status(Response.Status.OK).entity(user).build();
 			} else {
 				return Response.status(Response.Status.UNAUTHORIZED).build();
