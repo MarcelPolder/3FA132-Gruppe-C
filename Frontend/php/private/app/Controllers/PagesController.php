@@ -43,4 +43,23 @@ class PagesController extends \Webapp\Core\Controller {
 		$this->data['usersHTML'] = HVApi::getUsers(true);
 	}
 
+	public function readings() {
+		$form = Form::getInstance();
+		$post = Request::getInstance()->getPost();
+		if ($form->is('create-reading')) {
+			$response = HVApi::createReading(
+				$post['reading']['comment'],
+				$post['reading']['customer_id'],
+				$post['reading']['date_of_reading'],
+				$post['reading']['kind_of_meter'],
+				$post['reading']['meter_count'],
+				$post['reading']['meter_id'],
+				$post['reading']['substitute'],
+			);
+			if ($response) {
+				$form->success('Der Zählerstand wurde hinzugefügt');
+			}
+		}
+	}
+
 }

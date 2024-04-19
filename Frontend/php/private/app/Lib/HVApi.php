@@ -382,4 +382,176 @@ class HVApi {
 		$response = static::execCurl($ch);
 		return $response['status'] == 200;
 	}
+
+	public static function getReadings(bool $asHtml = false, int $chunkIdx) {
+		$ch = static::getCurl("/readings/get");
+		$response = static::execCurl($ch);
+		if ($response['status'] == 200) {
+			$data = json_decode($response['content'], true);
+			if ($asHtml) {
+				$form = \Webapp\Core\Form::getInstance();
+				$chunks = array_chunk($data, 100);
+				return implode("", array_map(fn($value) => '
+					<div class="reading" data-id="'.$value['id'].'">
+						<div class="grid col-2">
+							<div>
+								<p>ID:</p=>
+								<p>Kommentar:</p>
+								<p>Datum:</p>
+								<p>Typ:</p>
+								<p>Zählerstand:</p>
+								<p>Zählernummer:</p>
+								<p>Austausch:</p>
+								<p>&nbsp;</p>
+							</div>
+							<div>
+								<p class="reading-id">'.(empty($value['id']) ? "&nbsp;" : $value['id']).'</p>
+								<p class="reading-comment">'.(empty($value['comment']) ? "&nbsp;" : $value['comment']).'</p>
+								<p class="reading-date">'.(empty($value['date_of_reading']) ? "&nbsp;" : $value['date_of_reading']).'</p>
+								<p class="reading-type">'.(empty($value['kind_of_meter']) ? "&nbsp;" : $value['kind_of_meter']).'</p>
+								<p class="reading-count">'.(empty($value['meter_count']) ? "&nbsp;" : $value['meter_count']).'</p>
+								<p class="reading-meterid">'.(empty($value['meter_id']) ? "&nbsp;" : $value['meter_id']).'</p>
+								<p class="reading-substitute">'.(empty($value['substitute']) ? "&nbsp;" : $value['substitute']).'</p>
+								<p class="reading-actions">
+									<a href="readings/delete" class="ajaxClick" data=\''.json_encode(['id' => $value['id']]).'\' confirm="Soll der Zählerstand wirklich gelöscht werden?" callback="deleteReading"><i class="material-symbols-rounded">delete</i></a>
+									<a href="#" class="edit-reading-toggle"><i class="material-symbols-rounded">edit</i></a>
+								</p>
+							</div>
+						</div>
+						<div class="edit-reading" style="display: none;">
+							'.$form->render(
+								action: 'readings/update',
+								method: 'AJAX',
+								attributes: [
+									'callback' => 'updateReading'
+								],
+								return: true,
+								children: [
+									$form->input(
+										type: \Webapp\Core\FormInputType::Hidden,
+										name: 'reading[id]',
+										required: true,
+										value: $value['id'],
+									),
+									$form->label(
+										title: 'Kommentar',
+										titleAfterChildren: true,
+										children: [
+											$form->input(
+												type: \Webapp\Core\FormInputType::Text,
+												name: 'reading[comment]',
+												value: $value['comment']
+											)
+										]
+									),
+									$form->label(
+										title: 'Datum',
+										titleAfterChildren: true,
+										children: [
+											$form->input(
+												type: \Webapp\Core\FormInputType::Text,
+												name: 'reading[date_of_reading]',
+												value: $value['date_of_reading']
+											)
+										]
+									),
+									$form->label(
+										title: 'Typ',
+										titleAfterChildren: true,
+										children: [
+											$form->input(
+												type: \Webapp\Core\FormInputType::Text,
+												name: 'reading[kind_of_meter]',
+												value: $value['kind_of_meter']
+											)
+										]
+									),
+									$form->label(
+										title: 'Zählerstand',
+										titleAfterChildren: true,
+										children: [
+											$form->input(
+												type: \Webapp\Core\FormInputType::Text,
+												name: 'reading[meter_count]',
+												value: $value['meter_count']
+											)
+										]
+									),
+									$form->label(
+										title: 'Zählernummer',
+										titleAfterChildren: true,
+										children: [
+											$form->input(
+												type: \Webapp\Core\FormInputType::Text,
+												name: 'reading[meter_id]',
+												value: $value['meter_id']
+											)
+										]
+									),
+									$form->label(
+										title: 'Austausch',
+										titleAfterChildren: true,
+										children: [
+											$form->input(
+												type: \Webapp\Core\FormInputType::Checkbox,
+												name: 'reading[substitute]',
+												checked: !empty($value['substitute']),
+											)
+										]
+									),
+									'<div class="text-right">',
+									$form->button(
+										type: \Webapp\Core\FormButtonType::Submit,
+										name: 'update-reading',
+										value: '<i class="material-symbols-rounded">edit</i>',
+									),
+									"</div>"
+								]
+							).'
+						</div>
+					</div>
+				', $chunks[$chunkIdx] ?? []));
+			}
+			return $data;
+		}
+		return false;
+	}
+	public static function createReading(
+		string $comment,
+		int $customer_id,
+		string $date_of_reading,
+		string $kind_of_meter,
+		int $meter_count,
+		int $meter_id,
+		int $substitute,
+	)  {
+		$ch = static::getCurl("/readings/create");
+		curl_setopt($ch, CURLOPT_PUT, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['reading' => [
+			'comment' => $comment,
+			'customer_id' => $customer_id,
+			'date_of_reading' => $date_of_reading,
+			'kind_of_meter' => $kind_of_meter,
+			'meter_count' => $meter_count,
+			'meter_id' => $meter_id,
+			'substitute' => $substitute,
+		]]));
+		$response = static::execCurl($ch);
+		return $response['status'] == 201;
+	}
+
+	public static function deleteReading(int $id) {
+		$ch = static::getCurl("/readings/delete/".$id);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+		$response = static::execCurl($ch);
+		return $response['status'] == 200;
+	}
+
+	public static function updateReading(int $id, array $reading) {
+		$ch = static::getCurl("/readings/update/".$id);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($reading));
+		$response = static::execCurl($ch);
+		return $response['status'] == 200;
+	}
 }

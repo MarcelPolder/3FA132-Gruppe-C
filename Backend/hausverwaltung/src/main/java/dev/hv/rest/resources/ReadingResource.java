@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.Generated;
 
-@Path("reading")
+@Path("readings")
 public class ReadingResource {
 
 	@GET
@@ -44,7 +44,7 @@ public class ReadingResource {
 	@GET
 	@Path("get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllUsers() {
+	public Response getAllReadings() {
 		List<IRReading> reading = (new ReadingsJsonUtil()).getAll();
 		return Response.status(Response.Status.OK).entity(reading).build();
 	}

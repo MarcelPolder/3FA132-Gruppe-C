@@ -65,6 +65,71 @@ class AjaxController extends \Webapp\Core\Controller {
 		}
 	}
 
+	public function readings() {
+		$params = Router::getParams();
+		$post = Request::getInstance()->getPost();
+		$response = [];
+
+		if (!empty($params)) {
+			switch ($params[0]) {
+				case 'get':
+					$chunk = empty($post['index']) ? 0 : $post['index'];
+					$customers = HVApi::getReadings(true, $chunk);
+					if (!empty($customers)) {
+						$response = Error::json(
+							msg: 'Erfolgreich',
+							type: 'success',
+							status: 200,
+							returnEncoded: false,
+							data: ['html' => $customers],
+						);
+					}
+					break;
+				case 'delete':
+					if (!empty($post['id'])) {
+						$response = HVApi::deleteReading($post['id']);
+						if (!empty($response)) {
+							$response = Error::json(
+								msg: 'Der Zählerstand wurde gelöscht.',
+								type: 'success',
+								status: 200,
+								returnEncoded: false,
+								data: [
+									'id' => $post['id'],
+								],
+							);
+						} else {
+							$response = Error::json(
+								msg: 'Der Kunde konnte nicht gelöscht werden.',
+								returnEncoded: false,
+							);
+						}
+					}
+					break;
+				case 'update':
+					if (!empty($post['reading']['id'])) {
+						$success = HVApi::updateReading($post['reading']['id'], ['reading' => $post['reading']]);
+						if (!empty($success)) {
+							$response = Error::json(
+								msg: 'Der Zählerstand wurde bearbeitet.',
+								type: 'success',
+								status: 200,
+								data: $post['reading'],
+								returnEncoded: false,
+							);
+						}
+						break;
+					}
+					break;
+			}
+		}
+
+		$response = json_encode($response);
+		header("Content-Length: ".mb_strlen($response));
+		echo $response;
+		exit;
+	}
+
 	public function customers() {
 		$params = Router::getParams();
 		$post = Request::getInstance()->getPost();
