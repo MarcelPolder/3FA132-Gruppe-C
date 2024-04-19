@@ -14,7 +14,7 @@ public class ReadingResourceTest {
         resource.getUserById(1); // Dummy-Daten
 
         // Aufruf der getAllUsers-Methode
-        resource.getAllUsers();
+        resource.getAllReadings();
 
         // Aufruf der createReading-Methode
         RReading newReading = new RReading(); // Erstellen Sie ein geeignetes RReading-Objekt
